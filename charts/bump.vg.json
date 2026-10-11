@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Bump chart: each player's rank by running total of disposals.",
   "data": {
-    "url": "../data/stats_brownlow_top_ten.csv",
+    "url": "https://github.com/alexabrimer/3179/tree/main/data/stats_brownlow_top_ten.csv",
     "format": {"type": "csv", "parse": {"disposals": "number"}}
   },
   "transform": [
