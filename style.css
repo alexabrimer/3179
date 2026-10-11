@@ -34,6 +34,11 @@ p {
     color: #2a2a2b;
     font-size: 16px;
 }
+
+#chart {
+    margin-left: 30px;
+}
+
 #choropleth_map {
 	top:100px;
 	bottom: 100px; 

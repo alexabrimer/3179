@@ -1,11 +1,7 @@
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
  "title": {
-  "text": "AFL player trades by club",
-  "subtitle": [
-   "Line width = Draftguru expected value of the trade. Clubs are drawn at their real locations;",
-   "the dot on a flow marks the arriving club. Hover a dot for the club."
-  ]
+  "text": "AFL player trades by club"
  },
  "width": 760,
  "height": 560,

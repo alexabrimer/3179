@@ -26,14 +26,14 @@
       "scale": {"domain": [-0.3, 1.3]}
     },
     "y": {
-      "field": "disposals",
+      "field": "disposalEfficiency",
       "type": "quantitative",
-      "title": "Disposals"
+      "title": "Disposal Efficiency (%)"
     },
     "color": {"field": "player", "type": "nominal", "legend": null},
     "tooltip": [
       {"field": "player", "type": "nominal", "title": "Player"},
-      {"field": "disposals", "type": "quantitative", "title": "Disposals"}
+      {"field": "disposalEfficiency", "type": "quantitative", "title": "Disposal Efficiency (%)"}
     ]
   },
   "spacing": 0,
