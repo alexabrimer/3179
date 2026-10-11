@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "data": {"url": "../data/stats_brownlow_top_ten.csv"},
+  "data": {"url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv"},
   "mark": "rect",
   "width": 300,
   "height": 200,

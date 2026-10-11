@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Jitter plot using faceted columns instead of xOffset (works on Vega-Lite 4 and 5).",
   "data": {
-    "url": "../data/stats_brownlow_top_ten.csv",
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
     "format": {"type": "csv", "parse": {"disposals": "number"}}
   },
   "transform": [

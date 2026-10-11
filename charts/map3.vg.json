@@ -5,7 +5,7 @@
   "height": 400,
   "projection": {"type": "mercator"},
   "data": {
-    "url": "data/aus_states.json",
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/aus_states.json",
     "format": {"type": "topojson", "feature": "ne_50m_admin_1_states_provinces"}
   },
   "mark": { 

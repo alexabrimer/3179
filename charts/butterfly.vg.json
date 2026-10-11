@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Butterfly chart: Daicos extends left, Smith extends right.",
   "data": {
-    "url": "../data/stats_brownlow_top_ten.csv",
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
     "format": {
       "type": "csv",
       "parse": {"goals": "number", "kicks": "number", "marks": "number", "disposals": "number", "tackles": "number"}

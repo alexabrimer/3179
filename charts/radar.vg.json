@@ -78,7 +78,7 @@
     {
       "description": "Player data (normalised to the top-ten maximum per stat)",
       "data": {
-        "url": "../data/stats_brownlow_top_ten.csv",
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
         "format": {
           "type": "csv",
           "parse": {"goals": "number", "kicks": "number", "marks": "number", "disposals": "number", "tackles": "number"}
