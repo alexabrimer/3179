@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Butterfly chart: Daicos extends left, Smith extends right.",
+  "data": {
+    "url": "../data/stats_brownlow_top_ten.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"goals": "number", "kicks": "number", "marks": "number", "disposals": "number", "tackles": "number"}
+    }
+  },
+  "transform": [
+    {"calculate": "datum['player.surname']", "as": "player"},
+    {"filter": "test(/daicos|smith/i, datum.player)"},
+    {"fold": ["goals", "kicks", "marks", "disposals", "tackles"], "as": ["stat", "value"]},
+    {
+      "aggregate": [{"op": "sum", "field": "value", "as": "total"}],
+      "groupby": ["player", "stat"]
+    },
+    {"calculate": "test(/daicos/i, datum.player) ? -datum.total : datum.total", "as": "signed"}
+  ],
+  "width": 500,
+  "height": {"step": 40},
+  "encoding": {
+    "y": {
+      "field": "stat",
+      "type": "nominal",
+      "title": null,
+      "sort": ["goals", "kicks", "marks", "disposals", "tackles"],
+      "axis": {"orient": "left", "domain": false, "ticks": false, "labelPadding": 8}
+    },
+    "x": {
+      "field": "signed",
+      "type": "quantitative",
+      "title": "Total",
+      "stack": null,
+      "axis": {"labelExpr": "abs(datum.value)", "grid": true}
+    },
+    "color": {
+      "field": "player",
+      "type": "nominal",
+      "title": "Player",
+      "legend": {"orient": "top"}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "height": {"band": 0.7}},
+      "encoding": {
+        "tooltip": [
+          {"field": "player", "type": "nominal", "title": "Player"},
+          {"field": "stat", "type": "nominal", "title": "Stat"},
+          {"field": "total", "type": "quantitative", "title": "Total"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.signed < 0"}],
+      "mark": {"type": "text", "align": "right", "dx": -4, "fontSize": 11},
+      "encoding": {"text": {"field": "total", "type": "quantitative"}}
+    },
+    {
+      "transform": [{"filter": "datum.signed >= 0"}],
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 11},
+      "encoding": {"text": {"field": "total", "type": "quantitative"}}
+    },
+    {
+      "mark": {"type": "rule", "color": "#333333"},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative"},
+        "y": {"value": 0},
+        "y2": {"value": {"expr": "height"}},
+        "color": {"value": "#333333"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

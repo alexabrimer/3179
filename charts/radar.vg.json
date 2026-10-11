@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "padding": 60,
+  "layer": [
+    {
+      "description": "Concentric grid rings (20% steps)",
+      "data": {"sequence": {"start": 0, "stop": 5, "as": "level_i"}},
+      "transform": [
+        {"calculate": "(datum.level_i + 1) / 5", "as": "level"},
+        {"calculate": "[0,1,2,3,4]", "as": "axes"},
+        {"flatten": ["axes"], "as": ["axis_i"]},
+        {"calculate": "PI/2 - 2*PI*datum.axis_i/5", "as": "angle"},
+        {"calculate": "datum.level * cos(datum.angle)", "as": "x"},
+        {"calculate": "datum.level * sin(datum.angle)", "as": "y"}
+      ],
+      "mark": {
+        "type": "line",
+        "interpolate": "linear-closed",
+        "stroke": "#cccccc",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "y": {"field": "y", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "detail": {"field": "level_i", "type": "nominal"},
+        "order": {"field": "axis_i", "type": "quantitative"}
+      }
+    },
+    {
+      "description": "Ring value labels along the top axis",
+      "data": {"sequence": {"start": 0, "stop": 5, "as": "level_i"}},
+      "transform": [
+        {"calculate": "(datum.level_i + 1) / 5", "as": "level"}
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 9, "color": "#999999"},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "y": {"field": "level", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "text": {"field": "level", "type": "quantitative", "format": ".0%"}
+      }
+    },
+    {
+      "description": "Spokes from centre to each axis",
+      "data": {"sequence": {"start": 0, "stop": 5, "as": "axis_i"}},
+      "transform": [
+        {"calculate": "PI/2 - 2*PI*datum.axis_i/5", "as": "angle"},
+        {"calculate": "0", "as": "x0"},
+        {"calculate": "0", "as": "y0"},
+        {"calculate": "cos(datum.angle)", "as": "x1"},
+        {"calculate": "sin(datum.angle)", "as": "y1"}
+      ],
+      "mark": {"type": "rule", "stroke": "#cccccc", "strokeWidth": 1},
+      "encoding": {
+        "x": {"field": "x0", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "y": {"field": "y0", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "x2": {"field": "x1"},
+        "y2": {"field": "y1"}
+      }
+    },
+    {
+      "description": "Axis labels just outside the outer ring",
+      "data": {"sequence": {"start": 0, "stop": 5, "as": "axis_i"}},
+      "transform": [
+        {"calculate": "['goals','kicks','marks','disposals','tackles'][datum.axis_i]", "as": "key"},
+        {"calculate": "PI/2 - 2*PI*datum.axis_i/5", "as": "angle"},
+        {"calculate": "1.12 * cos(datum.angle)", "as": "label_x"},
+        {"calculate": "1.12 * sin(datum.angle)", "as": "label_y"}
+      ],
+      "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "fontWeight": "bold", "color": "#222222"},
+      "encoding": {
+        "x": {"field": "label_x", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "y": {"field": "label_y", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "text": {"field": "key", "type": "nominal"}
+      }
+    },
+    {
+      "description": "Player data (normalised to the top-ten maximum per stat)",
+      "data": {
+        "url": "../data/stats_brownlow_top_ten.csv",
+        "format": {
+          "type": "csv",
+          "parse": {"goals": "number", "kicks": "number", "marks": "number", "disposals": "number", "tackles": "number"}
+        }
+      },
+      "transform": [
+        {"calculate": "datum['player.surname']", "as": "player"},
+        {"fold": ["goals", "kicks", "marks", "disposals", "tackles"], "as": ["key", "value"]},
+        {
+          "aggregate": [{"op": "sum", "field": "value", "as": "total"}],
+          "groupby": ["player", "key"]
+        },
+        {
+          "joinaggregate": [{"op": "max", "field": "total", "as": "key_max"}],
+          "groupby": ["key"]
+        },
+        {"calculate": "datum.key_max > 0 ? datum.total / datum.key_max : 0", "as": "norm"},
+        {"filter": "test(/daicos|smith/i, datum.player)"},
+        {"calculate": "indexof(['goals','kicks','marks','disposals','tackles'], datum.key)", "as": "key_index"},
+        {"calculate": "PI/2 - 2*PI*datum.key_index/5", "as": "angle"},
+        {"calculate": "datum.norm * cos(datum.angle)", "as": "x"},
+        {"calculate": "datum.norm * sin(datum.angle)", "as": "y"}
+      ],
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "y": {"field": "y", "type": "quantitative", "scale": {"domain": [-1.3, 1.3]}, "axis": null},
+        "color": {"field": "player", "type": "nominal", "legend": {"orient": "top", "title": "Player"}},
+        "order": {"field": "key_index", "type": "quantitative"}
+      },
+      "layer": [
+        {
+          "mark": {"type": "line", "strokeWidth": 2, "interpolate": "linear-closed"}
+        },
+        {
+          "mark": {"type": "area", "interpolate": "linear-closed", "opacity": 0.12}
+        },
+        {
+          "mark": {"type": "point", "size": 60, "filled": true},
+          "encoding": {
+            "tooltip": [
+              {"field": "player", "type": "nominal", "title": "Player"},
+              {"field": "key", "type": "nominal", "title": "Metric"},
+              {"field": "total", "type": "quantitative", "title": "Total"},
+              {"field": "norm", "type": "quantitative", "title": "% of top-ten max", "format": ".0%"}
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

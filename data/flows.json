@@ -1,0 +1,1102 @@
+[
+ {
+  "id": 0,
+  "from": "Brisbane",
+  "to": "West Coast",
+  "count": 1,
+  "value": 206,
+  "players": "Starcevich",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.89,
+    "lat": -25.997
+   },
+   {
+    "seq": 1,
+    "lon": 145.6,
+    "lat": -24.447
+   },
+   {
+    "seq": 2,
+    "lon": 137.499,
+    "lat": -24.155
+   },
+   {
+    "seq": 3,
+    "lon": 129.586,
+    "lat": -25.13
+   },
+   {
+    "seq": 4,
+    "lon": 121.862,
+    "lat": -27.341
+   },
+   {
+    "seq": 5,
+    "lon": 114.327,
+    "lat": -30.713
+   }
+  ],
+  "mlon": 115.822,
+  "mlat": -29.95
+ },
+ {
+  "id": 1,
+  "from": "Carlton",
+  "to": "Port Adelaide",
+  "count": 1,
+  "value": 56,
+  "players": "Durdin",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 144.981,
+    "lat": -34.609
+   },
+   {
+    "seq": 1,
+    "lon": 143.659,
+    "lat": -33.899
+   },
+   {
+    "seq": 2,
+    "lon": 142.275,
+    "lat": -33.395
+   },
+   {
+    "seq": 3,
+    "lon": 140.829,
+    "lat": -33.102
+   },
+   {
+    "seq": 4,
+    "lon": 139.322,
+    "lat": -33.021
+   },
+   {
+    "seq": 5,
+    "lon": 137.753,
+    "lat": -33.154
+   }
+  ],
+  "mlon": 139.438,
+  "mlat": -33.02
+ },
+ {
+  "id": 2,
+  "from": "Carlton",
+  "to": "Sydney",
+  "count": 1,
+  "value": 192,
+  "players": "Curnow",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 144.981,
+    "lat": -34.609
+   },
+   {
+    "seq": 1,
+    "lon": 146.638,
+    "lat": -35.061
+   },
+   {
+    "seq": 2,
+    "lon": 148.289,
+    "lat": -35.275
+   },
+   {
+    "seq": 3,
+    "lon": 149.936,
+    "lat": -35.251
+   },
+   {
+    "seq": 4,
+    "lon": 151.577,
+    "lat": -34.991
+   },
+   {
+    "seq": 5,
+    "lon": 153.214,
+    "lat": -34.491
+   }
+  ],
+  "mlon": 151.624,
+  "mlat": -34.98
+ },
+ {
+  "id": 3,
+  "from": "Collingwood",
+  "to": "Melbourne",
+  "count": 1,
+  "value": 39,
+  "players": "Mihocek",
+  "years": "2025",
+  "type": "Same state",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 147.332,
+    "lat": -35.235
+   },
+   {
+    "seq": 1,
+    "lon": 146.876,
+    "lat": -36.285
+   },
+   {
+    "seq": 2,
+    "lon": 146.649,
+    "lat": -37.322
+   },
+   {
+    "seq": 3,
+    "lon": 146.649,
+    "lat": -38.344
+   },
+   {
+    "seq": 4,
+    "lon": 146.876,
+    "lat": -39.352
+   },
+   {
+    "seq": 5,
+    "lon": 147.332,
+    "lat": -40.346
+   }
+  ],
+  "mlon": 146.802,
+  "mlat": -39.116
+ },
+ {
+  "id": 4,
+  "from": "Fremantle",
+  "to": "Carlton",
+  "count": 1,
+  "value": 77,
+  "players": "Reidy",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 114.327,
+    "lat": -33.35
+   },
+   {
+    "seq": 1,
+    "lon": 120.351,
+    "lat": -35.382
+   },
+   {
+    "seq": 2,
+    "lon": 126.428,
+    "lat": -36.501
+   },
+   {
+    "seq": 3,
+    "lon": 132.559,
+    "lat": -36.745
+   },
+   {
+    "seq": 4,
+    "lon": 138.743,
+    "lat": -36.121
+   },
+   {
+    "seq": 5,
+    "lon": 144.981,
+    "lat": -34.609
+   }
+  ],
+  "mlon": 143.35,
+  "mlat": -35.091
+ },
+ {
+  "id": 5,
+  "from": "Fremantle",
+  "to": "Port Adelaide",
+  "count": 1,
+  "value": 60,
+  "players": "Brodie",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 114.327,
+    "lat": -33.35
+   },
+   {
+    "seq": 1,
+    "lon": 119.029,
+    "lat": -34.678
+   },
+   {
+    "seq": 2,
+    "lon": 123.722,
+    "lat": -35.315
+   },
+   {
+    "seq": 3,
+    "lon": 128.407,
+    "lat": -35.277
+   },
+   {
+    "seq": 4,
+    "lon": 133.084,
+    "lat": -34.562
+   },
+   {
+    "seq": 5,
+    "lon": 137.753,
+    "lat": -33.154
+   }
+  ],
+  "mlon": 136.16,
+  "mlat": -33.715
+ },
+ {
+  "id": 6,
+  "from": "Geelong",
+  "to": "Richmond",
+  "count": 1,
+  "value": 1,
+  "players": "Retschko",
+  "years": "2025",
+  "type": "Same state",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 142.63,
+    "lat": -40.346
+   },
+   {
+    "seq": 1,
+    "lon": 144.176,
+    "lat": -39.994
+   },
+   {
+    "seq": 2,
+    "lon": 145.564,
+    "lat": -39.472
+   },
+   {
+    "seq": 3,
+    "lon": 146.795,
+    "lat": -38.778
+   },
+   {
+    "seq": 4,
+    "lon": 147.869,
+    "lat": -37.907
+   },
+   {
+    "seq": 5,
+    "lon": 148.785,
+    "lat": -36.852
+   }
+  ],
+  "mlon": 147.817,
+  "mlat": -37.956
+ },
+ {
+  "id": 7,
+  "from": "Gold Coast",
+  "to": "Carlton",
+  "count": 1,
+  "value": 56,
+  "players": "Ainsworth",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.89,
+    "lat": -29.653
+   },
+   {
+    "seq": 1,
+    "lon": 151.696,
+    "lat": -30.125
+   },
+   {
+    "seq": 2,
+    "lon": 149.708,
+    "lat": -30.864
+   },
+   {
+    "seq": 3,
+    "lon": 147.926,
+    "lat": -31.863
+   },
+   {
+    "seq": 4,
+    "lon": 146.351,
+    "lat": -33.116
+   },
+   {
+    "seq": 5,
+    "lon": 144.981,
+    "lat": -34.609
+   }
+  ],
+  "mlon": 145.989,
+  "mlat": -33.466
+ },
+ {
+  "id": 8,
+  "from": "Gold Coast",
+  "to": "Essendon",
+  "count": 1,
+  "value": 41,
+  "players": "Fiorini",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.89,
+    "lat": -29.653
+   },
+   {
+    "seq": 1,
+    "lon": 150.741,
+    "lat": -30.371
+   },
+   {
+    "seq": 2,
+    "lon": 147.895,
+    "lat": -31.466
+   },
+   {
+    "seq": 3,
+    "lon": 145.352,
+    "lat": -32.924
+   },
+   {
+    "seq": 4,
+    "lon": 143.113,
+    "lat": -34.728
+   },
+   {
+    "seq": 5,
+    "lon": 141.177,
+    "lat": -36.852
+   }
+  ],
+  "mlon": 142.147,
+  "mlat": -35.707
+ },
+ {
+  "id": 9,
+  "from": "Gold Coast",
+  "to": "St Kilda",
+  "count": 1,
+  "value": 123,
+  "players": "Flanders",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.89,
+    "lat": -29.653
+   },
+   {
+    "seq": 1,
+    "lon": 151.133,
+    "lat": -31.499
+   },
+   {
+    "seq": 2,
+    "lon": 148.863,
+    "lat": -33.57
+   },
+   {
+    "seq": 3,
+    "lon": 147.081,
+    "lat": -35.848
+   },
+   {
+    "seq": 4,
+    "lon": 145.787,
+    "lat": -38.309
+   },
+   {
+    "seq": 5,
+    "lon": 144.981,
+    "lat": -40.926
+   }
+  ],
+  "mlon": 145.312,
+  "mlat": -39.637
+ },
+ {
+  "id": 10,
+  "from": "Gold Coast",
+  "to": "Sydney",
+  "count": 1,
+  "value": 58,
+  "players": "Rosas",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.89,
+    "lat": -29.653
+   },
+   {
+    "seq": 1,
+    "lon": 153.353,
+    "lat": -30.6
+   },
+   {
+    "seq": 2,
+    "lon": 153.016,
+    "lat": -31.558
+   },
+   {
+    "seq": 3,
+    "lon": 152.881,
+    "lat": -32.526
+   },
+   {
+    "seq": 4,
+    "lon": 152.947,
+    "lat": -33.504
+   },
+   {
+    "seq": 5,
+    "lon": 153.214,
+    "lat": -34.491
+   }
+  ],
+  "mlon": 152.897,
+  "mlat": -33.121
+ },
+ {
+  "id": 11,
+  "from": "Gold Coast",
+  "to": "Western Bulldogs",
+  "count": 1,
+  "value": 52,
+  "players": "Budarick",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.89,
+    "lat": -29.653
+   },
+   {
+    "seq": 1,
+    "lon": 150.567,
+    "lat": -30.796
+   },
+   {
+    "seq": 2,
+    "lon": 147.634,
+    "lat": -32.305
+   },
+   {
+    "seq": 3,
+    "lon": 145.091,
+    "lat": -34.16
+   },
+   {
+    "seq": 4,
+    "lon": 142.939,
+    "lat": -36.337
+   },
+   {
+    "seq": 5,
+    "lon": 141.177,
+    "lat": -38.804
+   }
+  ],
+  "mlon": 141.964,
+  "mlat": -37.6
+ },
+ {
+  "id": 12,
+  "from": "Hawthorn",
+  "to": "Melbourne",
+  "count": 1,
+  "value": 65,
+  "players": "Jiath",
+  "years": "2025",
+  "type": "Same state",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 148.785,
+    "lat": -38.804
+   },
+   {
+    "seq": 1,
+    "lon": 148.354,
+    "lat": -39.036
+   },
+   {
+    "seq": 2,
+    "lon": 147.993,
+    "lat": -39.306
+   },
+   {
+    "seq": 3,
+    "lon": 147.702,
+    "lat": -39.615
+   },
+   {
+    "seq": 4,
+    "lon": 147.482,
+    "lat": -39.962
+   },
+   {
+    "seq": 5,
+    "lon": 147.332,
+    "lat": -40.346
+   }
+  ],
+  "mlon": 147.838,
+  "mlat": -39.456
+ },
+ {
+  "id": 13,
+  "from": "Hawthorn",
+  "to": "Sydney",
+  "count": 1,
+  "value": 38,
+  "players": "Serong",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 148.785,
+    "lat": -38.804
+   },
+   {
+    "seq": 1,
+    "lon": 150.049,
+    "lat": -38.206
+   },
+   {
+    "seq": 2,
+    "lon": 151.125,
+    "lat": -37.48
+   },
+   {
+    "seq": 3,
+    "lon": 152.01,
+    "lat": -36.621
+   },
+   {
+    "seq": 4,
+    "lon": 152.707,
+    "lat": -35.627
+   },
+   {
+    "seq": 5,
+    "lon": 153.214,
+    "lat": -34.491
+   }
+  ],
+  "mlon": 152.616,
+  "mlat": -35.783
+ },
+ {
+  "id": 14,
+  "from": "Melbourne",
+  "to": "Fremantle",
+  "count": 1,
+  "value": 61,
+  "players": "McVee",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 147.332,
+    "lat": -40.346
+   },
+   {
+    "seq": 1,
+    "lon": 141.347,
+    "lat": -37.17
+   },
+   {
+    "seq": 2,
+    "lon": 135.054,
+    "lat": -34.814
+   },
+   {
+    "seq": 3,
+    "lon": 128.453,
+    "lat": -33.364
+   },
+   {
+    "seq": 4,
+    "lon": 121.544,
+    "lat": -32.87
+   },
+   {
+    "seq": 5,
+    "lon": 114.327,
+    "lat": -33.35
+   }
+  ],
+  "mlon": 116.046,
+  "mlat": -33.151
+ },
+ {
+  "id": 15,
+  "from": "Melbourne",
+  "to": "GWS",
+  "count": 1,
+  "value": 42,
+  "players": "Oliver",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 147.332,
+    "lat": -40.346
+   },
+   {
+    "seq": 1,
+    "lon": 149.134,
+    "lat": -39.299
+   },
+   {
+    "seq": 2,
+    "lon": 150.623,
+    "lat": -38.074
+   },
+   {
+    "seq": 3,
+    "lon": 151.799,
+    "lat": -36.662
+   },
+   {
+    "seq": 4,
+    "lon": 152.663,
+    "lat": -35.054
+   },
+   {
+    "seq": 5,
+    "lon": 153.214,
+    "lat": -33.241
+   }
+  ],
+  "mlon": 152.83,
+  "mlat": -34.622
+ },
+ {
+  "id": 16,
+  "from": "Melbourne",
+  "to": "Gold Coast",
+  "count": 1,
+  "value": 377,
+  "players": "Petracca",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 147.332,
+    "lat": -40.346
+   },
+   {
+    "seq": 1,
+    "lon": 149.565,
+    "lat": -38.682
+   },
+   {
+    "seq": 2,
+    "lon": 151.338,
+    "lat": -36.795
+   },
+   {
+    "seq": 3,
+    "lon": 152.649,
+    "lat": -34.669
+   },
+   {
+    "seq": 4,
+    "lon": 153.5,
+    "lat": -32.293
+   },
+   {
+    "seq": 5,
+    "lon": 153.89,
+    "lat": -29.653
+   }
+  ],
+  "mlon": 153.734,
+  "mlat": -31.129
+ },
+ {
+  "id": 17,
+  "from": "North Melbourne",
+  "to": "Adelaide",
+  "count": 1,
+  "value": 41,
+  "players": "Maley",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 142.63,
+    "lat": -35.235
+   },
+   {
+    "seq": 1,
+    "lon": 141.541,
+    "lat": -35.219
+   },
+   {
+    "seq": 2,
+    "lon": 140.508,
+    "lat": -35.343
+   },
+   {
+    "seq": 3,
+    "lon": 139.533,
+    "lat": -35.607
+   },
+   {
+    "seq": 4,
+    "lon": 138.614,
+    "lat": -36.009
+   },
+   {
+    "seq": 5,
+    "lon": 137.753,
+    "lat": -36.547
+   }
+  ],
+  "mlon": 139.119,
+  "mlat": -35.768
+ },
+ {
+  "id": 18,
+  "from": "Richmond",
+  "to": "West Coast",
+  "count": 1,
+  "value": 47,
+  "players": "Young",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 148.785,
+    "lat": -36.852
+   },
+   {
+    "seq": 1,
+    "lon": 142.414,
+    "lat": -33.665
+   },
+   {
+    "seq": 2,
+    "lon": 135.782,
+    "lat": -31.396
+   },
+   {
+    "seq": 3,
+    "lon": 128.891,
+    "lat": -30.125
+   },
+   {
+    "seq": 4,
+    "lon": 121.739,
+    "lat": -29.895
+   },
+   {
+    "seq": 5,
+    "lon": 114.327,
+    "lat": -30.713
+   }
+  ],
+  "mlon": 116.032,
+  "mlat": -30.436
+ },
+ {
+  "id": 19,
+  "from": "St Kilda",
+  "to": "Melbourne",
+  "count": 2,
+  "value": 61,
+  "players": "Heath, Steele",
+  "years": "2025",
+  "type": "Same state",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 144.981,
+    "lat": -40.926
+   },
+   {
+    "seq": 1,
+    "lon": 145.505,
+    "lat": -40.936
+   },
+   {
+    "seq": 2,
+    "lon": 146.002,
+    "lat": -40.883
+   },
+   {
+    "seq": 3,
+    "lon": 146.472,
+    "lat": -40.767
+   },
+   {
+    "seq": 4,
+    "lon": 146.916,
+    "lat": -40.588
+   },
+   {
+    "seq": 5,
+    "lon": 147.332,
+    "lat": -40.346
+   }
+  ],
+  "mlon": 146.241,
+  "mlat": -40.833
+ },
+ {
+  "id": 20,
+  "from": "Sydney",
+  "to": "Carlton",
+  "count": 2,
+  "value": 246,
+  "players": "Florent, Hayward",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.214,
+    "lat": -34.491
+   },
+   {
+    "seq": 1,
+    "lon": 151.557,
+    "lat": -34.036
+   },
+   {
+    "seq": 2,
+    "lon": 149.906,
+    "lat": -33.819
+   },
+   {
+    "seq": 3,
+    "lon": 148.259,
+    "lat": -33.843
+   },
+   {
+    "seq": 4,
+    "lon": 146.618,
+    "lat": -34.107
+   },
+   {
+    "seq": 5,
+    "lon": 144.981,
+    "lat": -34.609
+   }
+  ],
+  "mlon": 146.571,
+  "mlat": -34.118
+ },
+ {
+  "id": 21,
+  "from": "Sydney",
+  "to": "Collingwood",
+  "count": 1,
+  "value": 59,
+  "players": "Buller",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 153.214,
+    "lat": -34.491
+   },
+   {
+    "seq": 1,
+    "lon": 151.974,
+    "lat": -34.299
+   },
+   {
+    "seq": 2,
+    "lon": 150.765,
+    "lat": -34.278
+   },
+   {
+    "seq": 3,
+    "lon": 149.589,
+    "lat": -34.427
+   },
+   {
+    "seq": 4,
+    "lon": 148.445,
+    "lat": -34.747
+   },
+   {
+    "seq": 5,
+    "lon": 147.332,
+    "lat": -35.235
+   }
+  ],
+  "mlon": 148.835,
+  "mlat": -34.618
+ },
+ {
+  "id": 22,
+  "from": "West Coast",
+  "to": "Carlton",
+  "count": 1,
+  "value": 74,
+  "players": "Chesser",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 114.327,
+    "lat": -30.713
+   },
+   {
+    "seq": 1,
+    "lon": 120.132,
+    "lat": -33.327
+   },
+   {
+    "seq": 2,
+    "lon": 126.1,
+    "lat": -34.986
+   },
+   {
+    "seq": 3,
+    "lon": 132.231,
+    "lat": -35.741
+   },
+   {
+    "seq": 4,
+    "lon": 138.524,
+    "lat": -35.617
+   },
+   {
+    "seq": 5,
+    "lon": 144.981,
+    "lat": -34.609
+   }
+  ],
+  "mlon": 143.299,
+  "mlat": -34.955
+ },
+ {
+  "id": 23,
+  "from": "West Coast",
+  "to": "St Kilda",
+  "count": 1,
+  "value": 80,
+  "players": "Ryan",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 114.327,
+    "lat": -30.713
+   },
+   {
+    "seq": 1,
+    "lon": 119.569,
+    "lat": -34.654
+   },
+   {
+    "seq": 2,
+    "lon": 125.255,
+    "lat": -37.566
+   },
+   {
+    "seq": 3,
+    "lon": 131.386,
+    "lat": -39.541
+   },
+   {
+    "seq": 4,
+    "lon": 137.961,
+    "lat": -40.647
+   },
+   {
+    "seq": 5,
+    "lon": 144.981,
+    "lat": -40.926
+   }
+  ],
+  "mlon": 143.246,
+  "mlat": -40.934
+ },
+ {
+  "id": 24,
+  "from": "Western Bulldogs",
+  "to": "Gold Coast",
+  "count": 1,
+  "value": 107,
+  "players": "Ugle-Hagan",
+  "years": "2025",
+  "type": "Interstate",
+  "path": [
+   {
+    "seq": 0,
+    "lon": 141.177,
+    "lat": -38.804
+   },
+   {
+    "seq": 1,
+    "lon": 144.5,
+    "lat": -37.765
+   },
+   {
+    "seq": 2,
+    "lon": 147.433,
+    "lat": -36.353
+   },
+   {
+    "seq": 3,
+    "lon": 149.976,
+    "lat": -34.546
+   },
+   {
+    "seq": 4,
+    "lon": 152.128,
+    "lat": -32.321
+   },
+   {
+    "seq": 5,
+    "lon": 153.89,
+    "lat": -29.653
+   }
+  ],
+  "mlon": 153.103,
+  "mlat": -30.975
+ }
+]

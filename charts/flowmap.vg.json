@@ -1,0 +1,411 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": "AFL player trades by club",
+  "subtitle": [
+   "Line width = Draftguru expected value of the trade. Clubs are drawn at their real locations;",
+   "the dot on a flow marks the arriving club. Hover a dot for the club."
+  ]
+ },
+ "width": 760,
+ "height": 560,
+ "params": [
+  {
+   "name": "focus",
+   "value": "All",
+   "bind": {
+    "input": "select",
+    "name": "Show club: ",
+    "options": [
+     "All",
+     "Adelaide",
+     "Brisbane",
+     "Carlton",
+     "Collingwood",
+     "Essendon",
+     "Fremantle",
+     "GWS",
+     "Geelong",
+     "Gold Coast",
+     "Hawthorn",
+     "Melbourne",
+     "North Melbourne",
+     "Port Adelaide",
+     "Richmond",
+     "St Kilda",
+     "Sydney",
+     "West Coast",
+     "Western Bulldogs"
+    ]
+   }
+  }
+ ],
+ "projection": {
+  "type": "mercator"
+ },
+ "layer": [
+  {
+   "data": {
+    "url": "../data/aus_states.json",
+    "format": {"type": "topojson", "feature": "ne_50m_admin_1_states_provinces"}
+   },
+   "mark": {
+    "type": "geoshape",
+    "fill": "#eceff1",
+    "stroke": "#b0bec5",
+    "strokeWidth": 0.6
+   }
+  },
+  {
+   "data": {
+    "url": "../data/draftguru_trades.csv",
+    "format": {
+     "type": "csv",
+     "parse": {
+      "expected": "number"
+     }
+    }
+   },
+   "transform": [
+    {
+     "calculate": "split(datum.assets_received, ' + ')",
+     "as": "terms"
+    },
+    {
+     "joinaggregate": [
+      {
+       "op": "values",
+       "field": "club",
+       "as": "trade_rows"
+      },
+      {
+       "op": "max",
+       "field": "expected",
+       "as": "trade_max"
+      }
+     ],
+     "groupby": [
+      "trade_id"
+     ]
+    },
+    {
+     "flatten": [
+      "terms"
+     ],
+     "as": [
+      "term"
+     ]
+    },
+    {
+     "filter": "length(trim(datum.term)) > 0 && slice(trim(datum.term), 0, 1) != '#'"
+    },
+    {
+     "calculate": "replace(trim(datum.term), regexp('\\\\s*\\\\(\\\\d+ games?\\\\)$'), '')",
+     "as": "player"
+    },
+    {
+     "calculate": "({'Starcevich': 'Brisbane', 'Ainsworth': 'Gold Coast', 'Durdin': 'Carlton'})[datum.player] || (length(datum.trade_rows) == 2 ? (datum.trade_rows[0].club == datum.club ? datum.trade_rows[1].club : datum.trade_rows[0].club) : null)",
+     "as": "from"
+    },
+    {
+     "calculate": "datum.club",
+     "as": "to"
+    },
+    {
+     "filter": "datum.from != null"
+    },
+    {
+     "joinaggregate": [
+      {
+       "op": "count",
+       "as": "n_moves"
+      }
+     ],
+     "groupby": [
+      "trade_id"
+     ]
+    },
+    {
+     "calculate": "datum.trade_max / datum.n_moves",
+     "as": "val"
+    },
+    {
+     "aggregate": [
+      {
+       "op": "sum",
+       "field": "val",
+       "as": "value"
+      },
+      {
+       "op": "count",
+       "as": "count"
+      },
+      {
+       "op": "values",
+       "field": "player",
+       "as": "plist"
+      }
+     ],
+     "groupby": [
+      "from",
+      "to"
+     ]
+    },
+    {
+     "filter": "focus == 'All' || datum.from == focus || datum.to == focus"
+    },
+    {
+     "calculate": "datum.plist[0].player + (length(datum.plist) > 1 ? ', ' + datum.plist[1].player : '') + (length(datum.plist) > 2 ? ', ' + datum.plist[2].player : '') + (length(datum.plist) > 3 ? ', ' + datum.plist[3].player : '') + (length(datum.plist) > 4 ? ', ' + datum.plist[4].player : '') + (length(datum.plist) > 5 ? ', ' + datum.plist[5].player : '') + (length(datum.plist) > 6 ? ' +' + (length(datum.plist) - 6) + ' more' : '')",
+     "as": "players"
+    },
+    {
+     "lookup": "from",
+     "from": {
+      "data": {
+       "url": "../data/clubs.json"
+      },
+      "key": "club",
+      "fields": [
+       "lon",
+       "lat"
+      ]
+     },
+     "as": [
+      "x1",
+      "lat1"
+     ]
+    },
+    {
+     "lookup": "to",
+     "from": {
+      "data": {
+       "url": "../data/clubs.json"
+      },
+      "key": "club",
+      "fields": [
+       "lon",
+       "lat"
+      ]
+     },
+     "as": [
+      "x2",
+      "lat2"
+     ]
+    },
+    {
+     "calculate": "180/PI*log(tan(PI/4 + datum.lat1*PI/360))",
+     "as": "y1"
+    },
+    {
+     "calculate": "180/PI*log(tan(PI/4 + datum.lat2*PI/360))",
+     "as": "y2"
+    },
+    {
+     "calculate": "datum.x2 - datum.x1",
+     "as": "dx"
+    },
+    {
+     "calculate": "datum.y2 - datum.y1",
+     "as": "dy"
+    },
+    {
+     "calculate": "sqrt(datum.dx * datum.dx + datum.dy * datum.dy)",
+     "as": "len"
+    },
+    {
+     "calculate": "(datum.x1 + datum.x2) / 2 + 0.22 * datum.dy",
+     "as": "cx"
+    },
+    {
+     "calculate": "(datum.y1 + datum.y2) / 2 - 0.22 * datum.dx",
+     "as": "cy"
+    },
+    {
+     "calculate": "max(0.5, 1 - 1.6 / datum.len)",
+     "as": "tm"
+    },
+    {
+     "calculate": "[0, 0.2, 0.4, 0.6, 0.8, datum.tm, 1]",
+     "as": "ts"
+    },
+    {
+     "flatten": [
+      "ts"
+     ],
+     "as": [
+      "t"
+     ]
+    },
+    {
+     "calculate": "pow(1 - datum.t, 2) * datum.x1 + 2 * (1 - datum.t) * datum.t * datum.cx + datum.t * datum.t * datum.x2",
+     "as": "plon"
+    },
+    {
+     "calculate": "(180/PI*(2*atan(exp((pow(1 - datum.t, 2) * datum.y1 + 2 * (1 - datum.t) * datum.t * datum.cy + datum.t * datum.t * datum.y2)*PI/180))-PI/2))",
+     "as": "plat"
+    },
+    {
+     "calculate": "datum.from + ' > ' + datum.to",
+     "as": "id"
+    }
+   ],
+   "layer": [
+    {
+     "mark": {
+      "type": "line",
+      "interpolate": "cardinal",
+      "opacity": 0.6,
+      "color": "#1f77b4"
+     },
+     "encoding": {
+      "longitude": {
+       "field": "plon",
+       "type": "quantitative"
+      },
+      "latitude": {
+       "field": "plat",
+       "type": "quantitative"
+      },
+      "order": {
+       "field": "t",
+       "type": "quantitative"
+      },
+      "detail": {
+       "field": "id",
+       "type": "nominal"
+      },
+      "size": {
+       "field": "value",
+       "type": "quantitative",
+       "title": "Expected value",
+       "scale": {
+        "type": "sqrt",
+        "domain": [
+         0,
+         400
+        ],
+        "range": [
+         1,
+         11
+        ],
+        "clamp": true
+       },
+       "legend": {
+        "values": [
+         25,
+         100,
+         200,
+         400
+        ],
+        "symbolType": "stroke",
+        "symbolSize": 260,
+        "symbolStrokeColor": "#777"
+       }
+      },
+      "tooltip": [
+       {
+        "field": "from",
+        "type": "nominal"
+       },
+       {
+        "field": "to",
+        "type": "nominal"
+       },
+       {
+        "field": "players",
+        "type": "nominal"
+       },
+       {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Expected value",
+        "format": ".0f"
+       }
+      ]
+     }
+    },
+    {
+     "transform": [
+      {
+       "filter": "datum.t == datum.tm"
+      }
+     ],
+     "mark": {
+      "type": "circle",
+      "size": 34,
+      "opacity": 0.9,
+      "color": "#1f77b4"
+     },
+     "encoding": {
+      "longitude": {
+       "field": "plon",
+       "type": "quantitative"
+      },
+      "latitude": {
+       "field": "plat",
+       "type": "quantitative"
+      },
+      "tooltip": [
+       {
+        "field": "from",
+        "type": "nominal"
+       },
+       {
+        "field": "to",
+        "type": "nominal"
+       },
+       {
+        "field": "players",
+        "type": "nominal"
+       },
+       {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Expected value",
+        "format": ".0f"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "data": {
+    "url": "../data/clubs.json"
+   },
+   "mark": {
+    "type": "circle",
+    "size": 90,
+    "strokeWidth": 1.5
+   },
+   "encoding": {
+    "longitude": {
+     "field": "lon",
+     "type": "quantitative"
+    },
+    "latitude": {
+     "field": "lat",
+     "type": "quantitative"
+    },
+    "stroke": {
+     "condition": {
+      "test": "datum.club == focus",
+      "value": "#000"
+     },
+     "value": "#fff"
+    },
+    "tooltip": [
+     {
+      "field": "club",
+      "type": "nominal"
+     },
+     {
+      "field": "ground",
+      "type": "nominal",
+      "title": "Training base"
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,182 @@
+[
+ {
+  "club": "Carlton",
+  "code": "CAR",
+  "state": "VIC",
+  "ground": "Ikon Park, Carlton",
+  "lon": 144.967,
+  "lat": -37.789,
+  "x": 144.981,
+  "y": -34.609
+ },
+ {
+  "club": "Collingwood",
+  "code": "COL", 
+  "state": "VIC",
+  "ground": "AIA Centre, Olympic Park",
+  "lon": 144.98,
+  "lat": -37.825,
+  "x": 147.332,
+  "y": -35.235
+ },
+ {
+  "club": "Richmond",
+  "code": "RIC",
+  "state": "VIC",
+  "ground": "Punt Road Oval",
+  "lon": 144.983,
+  "lat": -37.832,
+  "x": 148.785,
+  "y": -36.852
+ },
+ {
+  "club": "Hawthorn",
+  "code": "HAW",
+  "state": "VIC",
+  "ground": "Kennedy Community Centre, Dingley",
+  "lon": 145.122,
+  "lat": -37.983,
+  "x": 148.785,
+  "y": -38.804
+ },
+ {
+  "club": "Melbourne",
+  "code": "MEL",
+  "state": "VIC",
+  "ground": "Gosch's Paddock, Olympic Park",
+  "lon": 144.984,
+  "lat": -37.826,
+  "x": 147.332,
+  "y": -40.346
+ },
+ {
+  "club": "St Kilda",
+  "code": "STK",
+  "state": "VIC",
+  "ground": "RSEA Park, Moorabbin",
+  "lon": 145.049,
+  "lat": -37.933,
+  "x": 144.981,
+  "y": -40.926
+ },
+ {
+  "club": "Geelong",
+  "code": "GEE",
+  "state": "VIC",
+  "ground": "GMHBA Stadium, Kardinia Park",
+  "lon": 144.355,
+  "lat": -38.158,
+  "x": 142.63,
+  "y": -40.346
+ },
+ {
+  "club": "Western Bulldogs",
+  "code": "WBD",
+  "state": "VIC",
+  "ground": "Whitten Oval, Footscray",
+  "lon": 144.899,
+  "lat": -37.8,
+  "x": 141.177,
+  "y": -38.804
+ },
+ {
+  "club": "Essendon",
+  "code": "ESS",
+  "state": "VIC",
+  "ground": "The Hangar, Essendon Fields",
+  "lon": 144.901,
+  "lat": -37.727,
+  "x": 141.177,
+  "y": -36.852
+ },
+ {
+  "club": "North Melbourne",
+  "code": "NTH",
+  "state": "VIC",
+  "ground": "Arden Street Oval",
+  "lon": 144.943,
+  "lat": -37.797,
+  "x": 142.63,
+  "y": -35.235
+ },
+ {
+  "club": "West Coast",
+  "code": "WCE",
+  "state": "WA",
+  "ground": "Mineral Resources Park, Lathlain",
+  "lon": 115.905,
+  "lat": -31.962,
+  "x": 114.327,
+  "y": -30.713
+ },
+ {
+  "club": "Fremantle",
+  "code": "FRE",
+  "state": "WA",
+  "ground": "Cockburn Central",
+  "lon": 115.86,
+  "lat": -32.12,
+  "x": 114.327,
+  "y": -33.35
+ },
+ {
+  "club": "Port Adelaide",
+  "code": "PTA",
+  "state": "SA",
+  "ground": "Alberton Oval",
+  "lon": 138.517,
+  "lat": -34.856,
+  "x": 137.753,
+  "y": -33.154
+ },
+ {
+  "club": "Adelaide",
+  "code": "ADE",
+  "state": "SA",
+  "ground": "Football Park, West Lakes",
+  "lon": 138.493,
+  "lat": -34.88,
+  "x": 137.753,
+  "y": -36.547
+ },
+ {
+  "club": "GWS",
+  "code": "GWS",
+  "state": "NSW",
+  "ground": "Giants Stadium, Olympic Park",
+  "lon": 151.068,
+  "lat": -33.847,
+  "x": 153.214,
+  "y": -33.241
+ },
+ {
+  "club": "Sydney",
+  "code": "SYD",
+  "state": "NSW",
+  "ground": "Moore Park",
+  "lon": 151.225,
+  "lat": -33.89,
+  "x": 153.214,
+  "y": -34.491
+ },
+ {
+  "club": "Brisbane",
+  "code": "BRL",
+  "state": "QLD",
+  "ground": "Brighton Homes Arena, Springfield",
+  "lon": 152.909,
+  "lat": -27.675,
+  "x": 153.89,
+  "y": -25.997
+ },
+ {
+  "club": "Gold Coast",
+  "code": "GCS",
+  "state": "QLD",
+  "ground": "Carrara Stadium",
+  "lon": 153.367,
+  "lat": -28.006,
+  "x": 153.89,
+  "y": -29.653
+ }
+]

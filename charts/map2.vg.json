@@ -1,0 +1,16 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Map 2",
+  "width": 800,
+  "height": 400,
+  "projection": {"type": "mercator"},
+  "data": {
+    "url": "../data/aus_states.json",
+    "format": {"type": "topojson", "feature": "ne_50m_admin_1_states_provinces"}
+  },
+  "mark": { 
+    "type": "geoshape", "fill": "#e8e8e8", "stroke": "#555", "strokeWidth": 0.7 },
+  "encoding": {
+    "tooltip": { "field": "properties.name", "type": "nominal" }
+}
+}

@@ -1,0 +1,89 @@
+trade_id,year,trade,club,players_received,draft_picks_recieved,expected,actual,latitude,longitude
+1,2025,2025 Trade for Liam Reidy,Carlton,Reidy (4 games) ,#53 (#48 - Mikunda - 0 games) #71 (-) ,77,4,144.967,-37.789
+1,2025,2025 Trade for Liam Reidy,Fremantle,,#50 (#43 - Curtin - 4 games) #68 (-) ,31,4,115.86,-32.12
+2,2025,2025 Trade for Malcolm Rosas,Gold Coast,,#51 (-) #69 (-) ,26,0,153.367,-28.006
+2,2025,2025 Trade for Malcolm Rosas,Sydney,Rosas (16 games) ,#62 (-) ,58,16,151.225,-33.89
+3,2025,2025 Trade for Sam Flanders,Gold Coast,,#7 (#12 - Pickett - 16 games) ,123,16,153.367,-28.006
+3,2025,2025 Trade for Sam Flanders,St Kilda,Flanders (12 games) ,,77,12,145.049,-37.933
+4,2025,2025 Trade for Brandon Starcevich,Brisbane,,#16 (#23 - Schubert - 1 games) #22 (-) #44 (#37 - Swadling - 9 games) #50 (#43 - Curtin - 4 games) ,176,14,152.909,-27.675
+4,2025,2025 Trade for Brandon Starcevich,Fremantle,,#19 (#25 - Sweid - 0 games) #23 (-) #46 (#40 - Murray - 1 games) ,151,1,115.86,-32.12
+4,2025,2025 Trade for Brandon Starcevich,West Coast,Starcevich (11 games) ,#12 (#20 - Nairn - 4 games) #33 (#29 - Allen - 0 games) #52 (-) ,206,15,115.905,-31.962
+5,2025,2025 Trade for Judd McVee,Fremantle,McVee (24 games) ,,28,24,115.86,-32.12
+5,2025,2025 Trade for Judd McVee,Melbourne,,#23 (-) ,61,0,144.984,-37.826
+6,2025,2025 Trade for Liam Ryan,St Kilda,Ryan (17 games) ,#2027R3 (West Coast) (-) ,80,17,145.049,-37.933
+6,2025,2025 Trade for Liam Ryan,West Coast,,#2026R2 (St Kilda) (-) ,56,0,115.905,-31.962
+7,2025,2025 Trade for Max Heath,Melbourne,Heath (7 games) ,,28,7,144.984,-37.826
+7,2025,2025 Trade for Max Heath,St Kilda,,#2027R4 (Melbourne) (-) ,14,0,145.049,-37.933
+8,2025,2025 Trade for Brody Mihocek,Collingwood,,#61 (#55 - McCarthy - 0 games) #2026R3 (Melbourne) (-) ,39,0,144.98,-37.825
+8,2025,2025 Trade for Brody Mihocek,Melbourne,Mihocek (10 games) ,#71 (-) ,26,10,144.984,-37.826
+9,2025,2025 Trade for Campbell Chesser,Carlton,Chesser (3 games) ,,74,3,144.967,-37.789
+9,2025,2025 Trade for Campbell Chesser,West Coast,,#41 (#34 - Dalton - 5 games) ,26,5,115.905,-31.962
+10,2025,2025 Trade for Ben Ainsworth and Corey Durdin,Carlton,Ainsworth (25 games) ,#67 (-) ,73,25,144.967,-37.789
+10,2025,2025 Trade for Ben Ainsworth and Corey Durdin,Gold Coast,,#29 (#27 - Emmett - 7 games) ,46,7,153.367,-28.006
+10,2025,2025 Trade for Ben Ainsworth and Corey Durdin,Port Adelaide,Durdin (23 games) ,#2026R2 (Carlton) (-) ,112,23,138.517,-34.856
+11,2025,2025 GWS and Western Bulldogs Trade for Draft Picks,GWS,,#12 (#19 - Lindsay - 15 games) ,84,15,151.068,-33.847
+11,2025,2025 GWS and Western Bulldogs Trade for Draft Picks,Western Bulldogs,,#14 (-) #37 (#30 - Matthews - 0 games) ,119,0,144.899,-37.8
+12,2025,2025 Trade for Tylar Young,Richmond,,#38 (#31 - Peucker - 2 games) ,35,2,144.983,-37.832
+12,2025,2025 Trade for Tylar Young,West Coast,Young (23 games) ,,47,23,115.905,-31.962
+13,2025,2025 Trade for Will Brodie,Fremantle,,#103 (-) ,0,0,115.86,-32.12
+13,2025,2025 Trade for Will Brodie,Port Adelaide,Brodie (2 games) ,,60,2,138.517,-34.856
+14,2025,2025 Brisbane and Collingwood Trade for Draft Picks,Brisbane,,#59 (-) #2026R3 (Melbourne) (-) ,40,0,152.909,-27.675
+14,2025,2025 Brisbane and Collingwood Trade for Draft Picks,Collingwood,,#45 (#37 - Swadling - 9 games) #56 (#51 - Davis - 0 games) ,36,9,144.98,-37.825
+15,2025,2025 Trade for Brayden Fiorini,Essendon,Fiorini (2 games) ,,41,2,144.901,-37.727
+15,2025,2025 Trade for Brayden Fiorini,Gold Coast,,#2026R3 (Essendon) (-) ,30,0,153.367,-28.006
+16,2025,2025 Trade for Connor Budarick,Gold Coast,,#37 (#30 - Matthews - 0 games) ,39,0,153.367,-28.006
+16,2025,2025 Trade for Connor Budarick,Western Bulldogs,Budarick (16 games) ,#70 (-) ,52,16,144.899,-37.8
+17,2025,2025 Trade for Oliver Florent,Carlton,Florent (25 games) ,,53,25,144.967,-37.789
+17,2025,2025 Trade for Oliver Florent,Sydney,,#2026R3 (Carlton) (-) ,23,0,151.225,-33.89
+18,2025,2025 Trade for Changkuoth Jiath,Hawthorn,,#42 (#35 - Phillipou - 0 games) #2026R4 (Melbourne) (-) ,37,0,145.122,-37.983
+18,2025,2025 Trade for Changkuoth Jiath,Melbourne,Jiath (16 games) ,,65,16,144.984,-37.826
+19,2025,2025 Trade for Jai Serong,Hawthorn,,#2026R3 (Sydney) (-) ,22,0,145.122,-37.983
+19,2025,2025 Trade for Jai Serong,Sydney,Serong (24 games) ,#2026R4 (Hawthorn) (-) ,38,24,151.225,-33.89
+20,2025,2025 Carlton and Hawthorn Trade for Draft Picks,Carlton,,#9 (#13 - Sharp - 15 games) #31 (-) #42 (#35 - Phillipou - 0 games) #43 (#36 - Kondogiannis - 12 games) ,205,27,144.967,-37.789
+20,2025,2025 Carlton and Hawthorn Trade for Draft Picks,Hawthorn,,#10 (#15 - Taylor - 0 games) #22 (-) ,166,0,145.122,-37.983
+21,2025,2025 Trade for Finnbar Maley,Adelaide,Maley (6 games) ,#64 (-) ,41,6,138.493,-34.88
+21,2025,2025 Trade for Finnbar Maley,North Melbourne,,#57 (-) #2026R4 (Adelaide) (-) ,28,0,144.943,-37.797
+22,2025,2025 Trade for Jamarra Ugle-Hagan,Gold Coast,Ugle-Hagan (3 games) ,,107,3,153.367,-28.006
+22,2025,2025 Trade for Jamarra Ugle-Hagan,Western Bulldogs,,#74 (-) ,6,0,144.899,-37.8
+23,2025,2025 Trade for Jack Buller,Collingwood,Buller (10 games) ,#2026R4 (Sydney) (-) ,59,10,144.98,-37.825
+23,2025,2025 Trade for Jack Buller,Sydney,,#2026R3 (Collingwood) (-) ,15,0,151.225,-33.89
+24,2025,2025 Trade for Jack Steele,Melbourne,Steele (24 games) ,,33,24,144.984,-37.826
+24,2025,2025 Trade for Jack Steele,St Kilda,,#2027R3 (Melbourne) (-) ,26,0,145.049,-37.933
+25,2025,2025 Trade for Patrick Retschko,Geelong,,#99 (-) ,0,0,144.355,-38.158
+25,2025,2025 Trade for Patrick Retschko,Richmond,Retschko (18 games) ,,1,18,144.983,-37.832
+26,2025,2025 Trade for Christian Petracca,Gold Coast,Petracca (20 games) ,#24 (-) #28 (-) #2026R2 (Melbourne) (-) ,207,20,153.367,-28.006
+26,2025,2025 Trade for Christian Petracca,Melbourne,,#7 (#11 - Taylor - 3 games) #8 (#12 - Pickett - 16 games) #37 (#30 - Matthews - 0 games) #2026R1 (Gold Coast) (-) #2027R3 (Gold Coast) (-) ,377,19,144.984,-37.826
+27,2025,2025 Trade for Clayton Oliver,GWS,Oliver (23 games) ,,42,23,151.068,-33.847
+27,2025,2025 Trade for Clayton Oliver,Melbourne,,#2026R3 (GWS) (-) ,19,0,144.984,-37.826
+28,2025,2025 Trade for Charlie Curnow and Will Hayward,Carlton,Hayward (21 games) ,#11 (#16 - Dovaston - 6 games) #2026R1 (Sydney) (-) #2027R1 (Sydney) (-) ,385,27,144.967,-37.789
+28,2025,2025 Trade for Charlie Curnow and Will Hayward,Sydney,Curnow (24 games) ,#31 (-) #42 (#35 - Phillipou - 0 games) #2027R2 (Carlton) (-) ,156,24,151.225,-33.89
+29,2025,2025 West Coast and Western Bulldogs Trade for Draft Picks,West Coast,,#2026R4 (Western Bulldogs) (-) ,13,0,115.905,-31.962
+29,2025,2025 West Coast and Western Bulldogs Trade for Draft Picks,Western Bulldogs,,#53 (-) ,15,0,144.899,-37.8
+30,2025,2025 Carlton and Essendon Trade for Draft Picks,Carlton,,#21 (-) #27 (-) #30 (#28 - Thomas - 0 games) ,169,0,144.967,-37.789
+30,2025,2025 Carlton and Essendon Trade for Draft Picks,Essendon,,#9 (#13 - Sharp - 15 games) #43 (#36 - Kondogiannis - 12 games) ,138,27,144.901,-37.727
+31,2025,2025 Carlton and North Melbourne Trade for Draft Picks,Carlton,,#25 (-) #46 (#38 - Evans - 0 games) #2026R2 (North Melbourne) (-) ,145,0,144.967,-37.789
+31,2025,2025 Carlton and North Melbourne Trade for Draft Picks,North Melbourne,,#11 (#16 - Dovaston - 6 games) #54 (#48 - Mikunda - 0 games) ,108,6,144.943,-37.797
+32,2025,2025 Gold Coast and GWS Trade for Draft Picks,Gold Coast,,#35 (-) ,38,0,153.367,-28.006
+32,2025,2025 Gold Coast and GWS Trade for Draft Picks,GWS,,#2026R2 (Melbourne) (-) ,61,0,151.068,-33.847
+33,2025,2025 Adelaide and Gold Coast Trade for Draft Picks,Adelaide,,#2026R3 (Essendon) (-) ,30,0,138.493,-34.88
+33,2025,2025 Adelaide and Gold Coast Trade for Draft Picks,Gold Coast,,#48 (-) ,19,0,153.367,-28.006
+34,2025,2025 Gold Coast and Port Adelaide Trade for Draft Picks,Gold Coast,,#49 (-) ,16,0,153.367,-28.006
+34,2025,2025 Gold Coast and Port Adelaide Trade for Draft Picks,Port Adelaide,,#2026R3 (Gold Coast) (-) ,16,0,138.517,-34.856
+35,2025,2025 Gold Coast and Western Bulldogs Trade for Draft Picks,Gold Coast,,#14 (-) #33 (-) #53 (-) ,137,0,153.367,-28.006
+35,2025,2025 Gold Coast and Western Bulldogs Trade for Draft Picks,Western Bulldogs,,#15 (#21 - Carmichael - 2 games) #29 (#27 - Emmett - 7 games) ,121,9,144.899,-37.8
+36,2025,2025 GWS and Hawthorn Trade for Draft Picks,GWS,,#14 (#15 - Taylor - 0 games) ,80,0,151.068,-33.847
+36,2025,2025 GWS and Hawthorn Trade for Draft Picks,Hawthorn,,#16 (#19 - Lindsay - 15 games) #2026R2 (Greater Western Sydney) (-) ,117,15,145.122,-37.983
+37,2025,2025 Hawthorn and West Coast Trade for Draft Picks,Hawthorn,,#18 (#20 - Nairn - 4 games) #2026R2 (St Kilda) (-) ,124,4,145.122,-37.983
+37,2025,2025 Hawthorn and West Coast Trade for Draft Picks,West Coast,,#17 (#19 - Lindsay - 15 games) ,70,15,115.905,-31.962
+38,2025,2025 Brisbane and Hawthorn Trade for Draft Picks,Brisbane,,#22 (-) #2026R3 (Hawthorn) (-) ,82,0,152.909,-27.675
+38,2025,2025 Brisbane and Hawthorn Trade for Draft Picks,Hawthorn,,#17 (#23 - Schubert - 1 games) ,70,1,145.122,-37.983
+39,2025,2025 Carlton and Gold Coast Trade for Draft Picks,Carlton,,#2026R2 (Gold Coast) (-) ,44,0,144.967,-37.789
+39,2025,2025 Carlton and Gold Coast Trade for Draft Picks,Gold Coast,,#28 (Thomas - 0 games) ,49,0,153.367,-28.006
+40,2025,2025 Hawthorn and West Coast Trade for Draft Picks,Hawthorn,,#34 (Dalton - 5 games) ,39,5,145.122,-37.983
+40,2025,2025 Hawthorn and West Coast Trade for Draft Picks,West Coast,,#2026R3 (Sydney) (-) #2027R3 (Hawthorn) (-) ,38,0,115.905,-31.962
+41,2025,2025 Brisbane and Carlton Trade for Draft Picks,Brisbane,,#38 (Evans - 0 games) ,35,0,152.909,-27.675
+41,2025,2025 Brisbane and Carlton Trade for Draft Picks,Carlton,,#2026R3 (Brisbane) (-) ,16,0,144.967,-37.789
+42,2025,2025 Collingwood and GWS Trade for Draft Picks,Collingwood,,#2026R4 (Greater Western Sydney) (-) ,11,0,144.98,-37.825
+42,2025,2025 Collingwood and GWS Trade for Draft Picks,GWS,,#51 (Davis - 0 games) ,16,0,151.068,-33.847
+43,2025,2025 Gold Coast and Richmond Trade for Draft Picks,Gold Coast,,#2026R5 (Richmond) (-) ,6,0,153.367,-28.006
+43,2025,2025 Gold Coast and Richmond Trade for Draft Picks,Richmond,,#52 (#54 - Roberts-Thomson - 3 games) ,15,3,144.983,-37.832
