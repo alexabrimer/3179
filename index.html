@@ -12,9 +12,10 @@
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
 <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 </head>
-<body>
+<body class="page">
 
   <header class="page-header">
     <h1>AFL Player Statistics for the 2026 Season</h1>
@@ -35,6 +36,12 @@
             </p>
             <h2>Another chart here</h2>
         </div>
+
+        <div class="pure-u-1">
+            <div id="choropleth" class="chart"></div>
+        </div>
+
+
         <div class="pure-u-1">
             <h2>Nick Daicos vs Bailey Smith: How do they compare?</h2>
         </div>
@@ -54,12 +61,17 @@
 
         <div class="pure-u-1">
             <h2>What was their Disposal Efficiency?</h2>
-            <div id="jitter" class="chart"></div>
+            <div id="violin" class="chart"></div>
         </div>
 
         <div class="pure-u-1">
             <h2>Contested Possessions across the season</h2>
             <div id="heatmap" class="chart"></div>
+        </div>
+
+        <div class="pure-u-1">
+            <h2>Brownlow Votes by Club</h2>
+            <div id="proportionalsymbol" class="chart"></div>
         </div>
 
     </div>

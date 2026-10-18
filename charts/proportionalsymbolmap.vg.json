@@ -1,0 +1,397 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map of 2026 Brownlow votes by club, built from player-level votes.",
+  "title": {
+    "text": "Brownlow votes by club, 2026",
+    "subtitle": "Circle area = total votes polled by the club's players in the data. Zoom with the dropdown."
+  },
+  "width": "container",
+  "height": 500,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "params": [
+    {
+      "name": "zoomTo",
+      "value": "Australia",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Australia",
+          "Victoria",
+          "Melbourne",
+          "New South Wales",
+          "Queensland",
+          "South Australia",
+          "Western Australia"
+        ],
+        "name": "Zoom to: "
+      }
+    },
+    {
+      "name": "viewCfg",
+      "expr": "{'Australia': {lon: 133.5, lat: -28.5, w: 0.7156, h: 0.667},'Victoria': {lon: 145.45, lat: -36.7, w: 0.1588, h: 0.113},'Melbourne': {lon: 145.01, lat: -37.855, w: 0.0045, h: 0.0072},'New South Wales': {lon: 151.146, lat: -33.868, w: 0.00698, h: 0.00526},'Queensland': {lon: 153.14, lat: -27.84, w: 0.0157, h: 0.01381},'South Australia': {lon: 138.505, lat: -34.868, w: 0.005, h: 0.0036},'Western Australia': {lon: 115.88, lat: -32.04, w: 0.007, h: 0.008}}[zoomTo]"
+    },
+    {
+      "name": "maxArea",
+      "expr": "{'Australia': 1700,'Victoria': 1300,'Melbourne': 2900,'New South Wales': 4500,'Queensland': 4500,'South Australia': 3200,'Western Australia': 4500}[zoomTo]"
+    },
+    {
+      "name": "labelsOn",
+      "expr": "zoomTo !== 'Australia' && zoomTo !== 'Victoria'"
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": {
+      "expr": "[viewCfg.lon, viewCfg.lat]"
+    },
+    "scale": {
+      "expr": "0.9 * min(width / viewCfg.w, height / viewCfg.h)"
+    }
+  },
+  "layer": [
+    {
+      "description": "Base map: Australian states only.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/aus_states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_50m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.admin === 'Australia'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e8e8e8",
+        "stroke": "white",
+        "strokeWidth": 1,
+        "clip": true
+      }
+    },
+    {
+      "description": "Proportional circles; largest drawn first so small ones stay visible.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/2026_brownlow.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Season": "number",
+            "Votes_3": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.Season === 2026"
+        },
+        {
+          "calculate": "datum.Votes_3",
+          "as": "brownlowVotes"
+        },
+        {
+          "calculate": "{'Magpies':'Collingwood','Cats':'Geelong','Bulldogs':'Western Bulldogs','Demons':'Melbourne','Lions':'Brisbane','Blues':'Carlton','Kangaroos':'North Melbourne','Swans':'Sydney','Crows':'Adelaide','Power':'Port Adelaide','Eagles':'West Coast','Dockers':'Fremantle','Hawks':'Hawthorn','Saints':'St Kilda','Suns':'Gold Coast','Giants':'GWS','Bombers':'Essendon','Tigers':'Richmond','Geelong Cats':'Geelong','Brisbane Lions':'Brisbane','Sydney Swans':'Sydney','Adelaide Crows':'Adelaide','West Coast Eagles':'West Coast','Gold Coast SUNS':'Gold Coast','GWS GIANTS':'GWS','North':'North Melbourne','Geelong':'Geelong','Essendon':'Essendon','Sydney':'Sydney','Fremantle':'Fremantle','Gold Coast':'Gold Coast','GWS':'GWS','Brisbane':'Brisbane','North Melbourne':'North Melbourne','Melbourne':'Melbourne','Carlton':'Carlton','St Kilda':'St Kilda','Adelaide':'Adelaide','Hawthorn':'Hawthorn','Richmond':'Richmond','Collingwood':'Collingwood','West Coast':'West Coast','Port Adelaide':'Port Adelaide','Western Bulldogs':'Western Bulldogs'}[trim(datum.Team)]",
+          "as": "club"
+        },
+        {
+          "filter": "datum.club"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "brownlowVotes",
+              "as": "votes"
+            },
+            {
+              "op": "count",
+              "as": "playersInFile"
+            }
+          ],
+          "groupby": [
+            "club"
+          ]
+        },
+        {
+          "lookup": "club",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/clubs.json"
+            },
+            "key": "club",
+            "fields": [
+              "code",
+              "lon",
+              "lat",
+              "ground"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.lon + ({COL:0.014,MEL:-0.016,RIC:0.012}[datum.code] || 0)",
+          "as": "plotLon"
+        },
+        {
+          "calculate": "datum.lat + ({COL:0.014,MEL:-0.004,RIC:-0.020}[datum.code] || 0)",
+          "as": "plotLat"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "fill": "#b03a2e",
+        "fillOpacity": 0.75,
+        "stroke": "white",
+        "strokeWidth": 1.5,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "plotLon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "plotLat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "votes",
+          "type": "quantitative",
+          "scale": {
+            "zero": true,
+            "range": [
+              0,
+              {
+                "expr": "maxArea"
+              }
+            ]
+          },
+          "legend": {
+            "title": "Brownlow votes",
+            "symbolFillColor": "#b03a2e",
+            "symbolOpacity": 0.75,
+            "orient": "right"
+          }
+        },
+        "order": {
+          "field": "votes",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "club",
+            "type": "nominal",
+            "title": "Club"
+          },
+          {
+            "field": "ground",
+            "type": "nominal",
+            "title": "Base"
+          },
+          {
+            "field": "votes",
+            "type": "quantitative",
+            "title": "Brownlow votes"
+          },
+          {
+            "field": "playersInFile",
+            "type": "quantitative",
+            "title": "Players in data"
+          }
+        ]
+      }
+    },
+    {
+      "description": "Vote totals on each circle (Melbourne view only).",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/2026_brownlow.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Season": "number",
+            "Votes_3": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.Season === 2026"
+        },
+        {
+          "calculate": "datum.Votes_3",
+          "as": "brownlowVotes"
+        },
+        {
+          "calculate": "{'Magpies':'Collingwood','Cats':'Geelong','Bulldogs':'Western Bulldogs','Demons':'Melbourne','Lions':'Brisbane','Blues':'Carlton','Kangaroos':'North Melbourne','Swans':'Sydney','Crows':'Adelaide','Power':'Port Adelaide','Eagles':'West Coast','Dockers':'Fremantle','Hawks':'Hawthorn','Saints':'St Kilda','Suns':'Gold Coast','Giants':'GWS','Bombers':'Essendon','Tigers':'Richmond','Geelong Cats':'Geelong','Brisbane Lions':'Brisbane','Sydney Swans':'Sydney','Adelaide Crows':'Adelaide','West Coast Eagles':'West Coast','Gold Coast SUNS':'Gold Coast','GWS GIANTS':'GWS','North':'North Melbourne','Geelong':'Geelong','Essendon':'Essendon','Sydney':'Sydney','Fremantle':'Fremantle','Gold Coast':'Gold Coast','GWS':'GWS','Brisbane':'Brisbane','North Melbourne':'North Melbourne','Melbourne':'Melbourne','Carlton':'Carlton','St Kilda':'St Kilda','Adelaide':'Adelaide','Hawthorn':'Hawthorn','Richmond':'Richmond','Collingwood':'Collingwood','West Coast':'West Coast','Port Adelaide':'Port Adelaide','Western Bulldogs':'Western Bulldogs'}[trim(datum.Team)]",
+          "as": "club"
+        },
+        {
+          "filter": "datum.club"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "brownlowVotes",
+              "as": "votes"
+            },
+            {
+              "op": "count",
+              "as": "playersInFile"
+            }
+          ],
+          "groupby": [
+            "club"
+          ]
+        },
+        {
+          "lookup": "club",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/clubs.json"
+            },
+            "key": "club",
+            "fields": [
+              "code",
+              "lon",
+              "lat",
+              "ground"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.lon + ({COL:0.014,MEL:-0.016,RIC:0.012}[datum.code] || 0)",
+          "as": "plotLon"
+        },
+        {
+          "calculate": "datum.lat + ({COL:0.014,MEL:-0.004,RIC:-0.020}[datum.code] || 0)",
+          "as": "plotLat"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "color": "white",
+        "fontWeight": "bold",
+        "fontSize": {
+          "expr": "labelsOn ? 11 : 0"
+        },
+        "dy": 5,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "plotLon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "plotLat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "votes",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "Club code (Melbourne view only).",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/2026_brownlow.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Season": "number",
+            "Votes_3": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.Season === 2026"
+        },
+        {
+          "calculate": "datum.Votes_3",
+          "as": "brownlowVotes"
+        },
+        {
+          "calculate": "{'Magpies':'Collingwood','Cats':'Geelong','Bulldogs':'Western Bulldogs','Demons':'Melbourne','Lions':'Brisbane','Blues':'Carlton','Kangaroos':'North Melbourne','Swans':'Sydney','Crows':'Adelaide','Power':'Port Adelaide','Eagles':'West Coast','Dockers':'Fremantle','Hawks':'Hawthorn','Saints':'St Kilda','Suns':'Gold Coast','Giants':'GWS','Bombers':'Essendon','Tigers':'Richmond','Geelong Cats':'Geelong','Brisbane Lions':'Brisbane','Sydney Swans':'Sydney','Adelaide Crows':'Adelaide','West Coast Eagles':'West Coast','Gold Coast SUNS':'Gold Coast','GWS GIANTS':'GWS','North':'North Melbourne','Geelong':'Geelong','Essendon':'Essendon','Sydney':'Sydney','Fremantle':'Fremantle','Gold Coast':'Gold Coast','GWS':'GWS','Brisbane':'Brisbane','North Melbourne':'North Melbourne','Melbourne':'Melbourne','Carlton':'Carlton','St Kilda':'St Kilda','Adelaide':'Adelaide','Hawthorn':'Hawthorn','Richmond':'Richmond','Collingwood':'Collingwood','West Coast':'West Coast','Port Adelaide':'Port Adelaide','Western Bulldogs':'Western Bulldogs'}[trim(datum.Team)]",
+          "as": "club"
+        },
+        {
+          "filter": "datum.club"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "brownlowVotes",
+              "as": "votes"
+            },
+            {
+              "op": "count",
+              "as": "playersInFile"
+            }
+          ],
+          "groupby": [
+            "club"
+          ]
+        },
+        {
+          "lookup": "club",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/clubs.json"
+            },
+            "key": "club",
+            "fields": [
+              "code",
+              "lon",
+              "lat",
+              "ground"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.lon + ({COL:0.014,MEL:-0.016,RIC:0.012}[datum.code] || 0)",
+          "as": "plotLon"
+        },
+        {
+          "calculate": "datum.lat + ({COL:0.014,MEL:-0.004,RIC:-0.020}[datum.code] || 0)",
+          "as": "plotLat"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "color": "white",
+        "fontSize": {
+          "expr": "labelsOn ? 9 : 0"
+        },
+        "dy": -6,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "plotLon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "plotLat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

@@ -31,10 +31,12 @@
     },
     {
       "joinaggregate": [{"op": "max", "field": "round", "as": "last_round"}]
+    },
+    {
+      "filter": {"field": "round", "range": [1,24]}
     }
   ],
-  "width": 500,
-  "height": 350,
+  "width": "container",
   "padding": {"left": 10, "right": 80, "top": 10, "bottom": 10},
   "encoding": {
     "x": {
@@ -70,7 +72,7 @@
       }
     },
     {
-      "transform": [{"filter": "datum.round == datum.last_round"}],
+      "transform": [{"filter": "datum.round == 24"}],
       "mark": {"type": "text", "align": "left", "dx": 10, "fontWeight": "bold"},
       "encoding": {"text": {"field": "player", "type": "nominal"}}
     }

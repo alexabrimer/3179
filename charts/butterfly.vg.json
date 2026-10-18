@@ -18,7 +18,7 @@
     },
     {"calculate": "test(/daicos/i, datum.player) ? -datum.total : datum.total", "as": "signed"}
   ],
-  "width": 500,
+  "width": "container",
   "height": {"step": 40},
   "encoding": {
     "y": {

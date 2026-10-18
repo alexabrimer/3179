@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth of AFL players by the state they were recruited from.",
+  "width": "container",
+  "height": 450,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "title": {
+    "text": {
+      "expr": "club === 'All clubs' ? 'Where AFL players are recruited from' : 'Where ' + club + ' players are recruited from'"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "description": "Base layer: all states in grey so states with no players still show.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/aus_states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_50m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e5e5e5",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.admin === 'Australia'"
+        }
+      ]
+    },
+    {
+      "description": "Choropleth layer: distinct players per state, joined onto the state shapes.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/player_details_with_state.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "filter": "club === 'All clubs' || datum.team === club"
+        },
+        {
+          "filter": "datum.recruitedState"
+        },
+        {
+          "calculate": "{'NSW':'New South Wales','VIC':'Victoria','QLD':'Queensland','SA':'South Australia','WA':'Western Australia','TAS':'Tasmania','NT':'Northern Territory','ACT':'Australian Capital Territory'}[datum.recruitedState]",
+          "as": "stateName"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "distinct",
+              "field": "providerId",
+              "as": "players"
+            }
+          ],
+          "groupby": [
+            "stateName"
+          ]
+        },
+        {
+          "lookup": "stateName",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/aus_states.json",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_50m_admin_1_states_provinces"
+              }
+            },
+            "key": "properties.name"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "players",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "title": "Players",
+            "orient": "right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "stateName",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "players",
+            "type": "quantitative",
+            "title": "Players"
+          }
+        ]
+      }
+    },
+    {
+      "description": "Coverage note: how many of the selected club's players have a known recruited state.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/player_details_with_state.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "filter": "club === 'All clubs' || datum.team === club"
+        },
+        {
+          "calculate": "datum.recruitedState ? 1 : 0",
+          "as": "hasState"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "hasState",
+              "as": "withState"
+            },
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.withState === 0 ? 'No recruitment data available for this club' : datum.withState + ' of ' + datum.n + ' players have a known recruited state'",
+          "as": "msg"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "fontSize": 11,
+        "color": "#666",
+        "x": {
+          "expr": "4"
+        },
+        "y": {
+          "expr": "height - 4"
+        }
+      },
+      "encoding": {
+        "text": {
+          "field": "msg",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  },
+  "params": [
+    {
+      "name": "club",
+      "value": "All clubs",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All clubs",
+          "Adelaide Crows",
+          "Brisbane Lions",
+          "Carlton",
+          "Collingwood",
+          "Essendon",
+          "Fremantle",
+          "GWS GIANTS",
+          "Geelong Cats",
+          "Gold Coast SUNS",
+          "Hawthorn",
+          "Melbourne",
+          "North Melbourne",
+          "Port Adelaide",
+          "Richmond",
+          "St Kilda",
+          "Sydney Swans",
+          "West Coast Eagles",
+          "Western Bulldogs"
+        ],
+        "name": "Club: "
+      }
+    }
+  ]
+}

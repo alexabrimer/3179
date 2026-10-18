@@ -2,22 +2,24 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {"url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv"},
   "mark": "rect",
-  "width": 300,
-  "height": 200,
+  "width": "container",
   "transform": [
     {
       "filter": {"field": "round\\.roundNumber", "range": [1,24]}
-    }
+    },
+    {"calculate": "datum['player.surname']", "as": "player"},
+    {"calculate": "datum['round.roundNumber']", "as": "round"}
   ],
   "encoding": {
     "x": {
-      "field": "round\\.roundNumber",
+      "field": "round",
       "type": "ordinal",
       "sort": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
-      "title": "Round Number"
+      "title": "Round Number",
+      "axis": {"labelAngle": 0}
     },
     "y": {
-      "field": "player\\.surname",
+      "field": "player",
       "type": "nominal",
       "title": "Player"
     },
@@ -26,7 +28,12 @@
       "type": "quantitative",
       "field": "contestedPossessions",
       "title": "Contested Possessions"
-    }
+    },
+    "tooltip": [
+          {"field": "player", "type": "nominal", "title": "Player"},
+          {"field": "round", "type": "ordinal", "title": "Round"},
+          {"field": "contestedPossessions", "type": "quantitative", "title": "Contested Possessions"}
+    ]
   },
   "config": {
     "axis": {"grid": true, "tickBand": "extent"},

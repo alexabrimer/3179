@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Violin plot with container sizing (single view, no facets).",
+  "data": {
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
+    "format": {"type": "csv", "parse": {"disposalEfficiency": "number"}}
+  },
+  "width": "container",
+  "height": 400,
+  "autosize": {"type": "fit", "contains": "padding"},
+  "transform": [
+    {"calculate": "datum['player.surname']", "as": "player"},
+    {
+      "density": "disposalEfficiency",
+      "groupby": ["player"],
+      "as": ["value", "density"]
+    },
+    {"window": [{"op": "dense_rank", "as": "idx"}], "sort": [{"field": "player"}]},
+    {"joinaggregate": [{"op": "max", "field": "density", "as": "maxDensity"}]},
+    {"calculate": "datum.density / datum.maxDensity * 0.4", "as": "half"},
+    {"calculate": "datum.idx - datum.half", "as": "xLow"},
+    {"calculate": "datum.idx + datum.half", "as": "xHigh"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "area", "orient": "horizontal", "opacity": 0.7, "interpolate": "monotone"},
+      "encoding": {
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Disposal Efficiency (%)"
+        },
+        "x": {
+          "field": "xLow",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"zero": false, "nice": false}
+        },
+        "x2": {"field": "xHigh"},
+        "color": {"field": "player", "type": "nominal", "legend": null},
+        "tooltip": [{"field": "player", "type": "nominal", "title": "Player"}]
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [{"op": "min", "field": "value", "as": "yMin"}],
+          "groupby": ["player", "idx"]
+        }
+      ],
+      "mark": {"type": "text", "baseline": "top", "dy": 6, "fontSize": 11},
+      "encoding": {
+        "x": {"field": "idx", "type": "quantitative", "axis": null},
+        "y": {"field": "yMin", "type": "quantitative"},
+        "text": {"field": "player", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}
