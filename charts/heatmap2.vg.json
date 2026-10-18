@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap of 2026 Brownlow votes by playing position and age.",
+  "title": {
+    "text": "Who polls the Brownlow votes?",
+    "subtitle": "Total votes by position and age (on 1 July 2026). The outlined cell polled the most.",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#555"
+  },
+  "width": "container",
+  "height": {
+    "step": 46
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/brownlow_with_details.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "votes",
+          "as": "totalVotes"
+        },
+        {
+          "op": "count",
+          "as": "players"
+        }
+      ],
+      "groupby": [
+        "positionLabel",
+        "ageBand"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "totalVotes",
+          "as": "maxVotes"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.totalVotes === datum.maxVotes",
+      "as": "isMax"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "ageBand",
+      "type": "ordinal",
+      "sort": [
+        "18–20",
+        "21–22",
+        "23–24",
+        "25–26",
+        "27–28",
+        "29–30",
+        "31+"
+      ],
+      "title": "Age during the 2026 season (years)",
+      "axis": {
+        "labelAngle": 0,
+        "orient": "bottom"
+      }
+    },
+    "y": {
+      "field": "positionLabel",
+      "type": "ordinal",
+      "sort": [
+        "Midfielder",
+        "Key forward",
+        "Medium forward",
+        "Midfielder-forward",
+        "Ruck",
+        "Medium defender",
+        "Key defender"
+      ],
+      "title": null,
+      "axis": {
+        "labelFontSize": 12
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "totalVotes",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "oranges"
+          },
+          "legend": {
+            "title": "Votes",
+            "orient": "right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "positionLabel",
+            "type": "nominal",
+            "title": "Position"
+          },
+          {
+            "field": "ageBand",
+            "type": "ordinal",
+            "title": "Age"
+          },
+          {
+            "field": "totalVotes",
+            "type": "quantitative",
+            "title": "Votes"
+          },
+          {
+            "field": "players",
+            "type": "quantitative",
+            "title": "Players who polled"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.isMax"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "fill": null,
+        "stroke": "#111",
+        "strokeWidth": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "field": "totalVotes",
+          "type": "quantitative"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.totalVotes > 110",
+            "value": "white"
+          },
+          "value": "#333"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  },
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}

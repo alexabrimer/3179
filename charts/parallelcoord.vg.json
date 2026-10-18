@@ -1,0 +1,485 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Parallel coordinates: season averages per game for the ten players who polled the most Brownlow votes.",
+  "title": {
+    "text": "Season averages per game, top ten Brownlow players",
+    "subtitle": [
+      "Each axis runs from the lowest of the ten (bottom) to the highest (top).",
+      "The names show who leads (▲) and who trails (▼) on each measure."
+    ],
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#555"
+  },
+  "width": "container",
+  "height": 460,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum['player.givenName'] + ' ' + datum['player.surname']",
+      "as": "player"
+    },
+    {
+      "calculate": "datum['clearances.totalClearances']",
+      "as": "clearances"
+    },
+    {
+      "calculate": "datum['extendedStats.pressureActs']",
+      "as": "pressure"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "disposals",
+          "as": "avgDisp"
+        },
+        {
+          "op": "mean",
+          "field": "marks",
+          "as": "avgMarks"
+        },
+        {
+          "op": "mean",
+          "field": "goals",
+          "as": "avgGoals"
+        },
+        {
+          "op": "mean",
+          "field": "tackles",
+          "as": "avgTackles"
+        },
+        {
+          "op": "mean",
+          "field": "pressure",
+          "as": "avgPressure"
+        },
+        {
+          "op": "mean",
+          "field": "clearances",
+          "as": "avgClearances"
+        },
+        {
+          "op": "mean",
+          "field": "inside50s",
+          "as": "avgInside50"
+        },
+        {
+          "op": "mean",
+          "field": "metresGained",
+          "as": "avgMetres"
+        }
+      ],
+      "groupby": [
+        "player"
+      ]
+    },
+    {
+      "fold": [
+        "avgDisp",
+        "avgMarks",
+        "avgGoals",
+        "avgTackles",
+        "avgPressure",
+        "avgClearances",
+        "avgInside50",
+        "avgMetres"
+      ],
+      "as": [
+        "statKey",
+        "value"
+      ]
+    },
+    {
+      "calculate": "{'avgDisp':'Disposals','avgMarks':'Marks','avgGoals':'Goals','avgTackles':'Tackles','avgPressure':'Pressure acts','avgClearances':'Clearances','avgInside50':'Inside 50s','avgMetres':'Metres gained'}[datum.statKey]",
+      "as": "stat"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "value",
+          "as": "lo"
+        },
+        {
+          "op": "max",
+          "field": "value",
+          "as": "hi"
+        }
+      ],
+      "groupby": [
+        "stat"
+      ]
+    },
+    {
+      "calculate": "(datum.value - datum.lo) / (datum.hi - datum.lo)",
+      "as": "norm"
+    }
+  ],
+  "layer": [
+    {
+      "description": "Vertical axis for each statistic.",
+      "mark": {
+        "type": "rule",
+        "color": "#cfcfcf",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "stat",
+          "type": "ordinal",
+          "sort": [
+            "Disposals",
+            "Marks",
+            "Goals",
+            "Tackles",
+            "Pressure acts",
+            "Clearances",
+            "Inside 50s",
+            "Metres gained"
+          ],
+          "scale": {
+            "type": "point",
+            "padding": 0.5
+          },
+          "axis": {
+            "orient": "top",
+            "title": null,
+            "labelAngle": 0,
+            "labelFontSize": 12,
+            "labelFontWeight": "bold",
+            "ticks": false,
+            "domain": false,
+            "labelPadding": 6
+          }
+        }
+      }
+    },
+    {
+      "description": "One line per player. Click a name in the legend to highlight.",
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "player"
+            ]
+          },
+          "bind": "legend"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "point": {
+          "filled": true,
+          "size": 55
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "stat",
+          "type": "ordinal",
+          "sort": [
+            "Disposals",
+            "Marks",
+            "Goals",
+            "Tackles",
+            "Pressure acts",
+            "Clearances",
+            "Inside 50s",
+            "Metres gained"
+          ],
+          "scale": {
+            "type": "point",
+            "padding": 0.5
+          }
+        },
+        "y": {
+          "field": "norm",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.34,
+              1.34
+            ]
+          },
+          "axis": null
+        },
+        "color": {
+          "field": "player",
+          "type": "nominal",
+          "scale": {
+            "scheme": "category10"
+          },
+          "legend": {
+            "title": "Click to highlight",
+            "titleFontSize": 11,
+            "labelFontSize": 12,
+            "symbolType": "stroke",
+            "symbolStrokeWidth": 4,
+            "orient": "bottom",
+            "labelLimit": 200,
+            "titleLimit": 230,
+            "columns": 5,
+            "direction": "horizontal",
+            "titleAnchor": "start"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.15
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "pick",
+            "value": 3.2
+          },
+          "value": 1.6
+        },
+        "tooltip": [
+          {
+            "field": "player",
+            "type": "nominal",
+            "title": "Player"
+          },
+          {
+            "field": "stat",
+            "type": "nominal",
+            "title": "Statistic"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Average per game",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "description": "Highest value on each axis, with the player who leads.",
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "value",
+              "as": "hi"
+            },
+            {
+              "op": "argmax",
+              "field": "value",
+              "as": "top"
+            }
+          ],
+          "groupby": [
+            "stat"
+          ]
+        },
+        {
+          "calculate": "datum.stat === 'Metres gained' ? format(datum.hi, ',.0f') : format(datum.hi, '.1f')",
+          "as": "valueText"
+        },
+        {
+          "calculate": "'▲ ' + peek(split(datum.top.player, ' '))",
+          "as": "who"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#222"
+          },
+          "encoding": {
+            "x": {
+              "field": "stat",
+              "type": "ordinal",
+              "sort": [
+                "Disposals",
+                "Marks",
+                "Goals",
+                "Tackles",
+                "Pressure acts",
+                "Clearances",
+                "Inside 50s",
+                "Metres gained"
+              ],
+              "scale": {
+                "type": "point",
+                "padding": 0.5
+              }
+            },
+            "y": {
+              "datum": 1.09,
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "valueText",
+              "type": "nominal"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "color": "#555"
+          },
+          "encoding": {
+            "x": {
+              "field": "stat",
+              "type": "ordinal",
+              "sort": [
+                "Disposals",
+                "Marks",
+                "Goals",
+                "Tackles",
+                "Pressure acts",
+                "Clearances",
+                "Inside 50s",
+                "Metres gained"
+              ],
+              "scale": {
+                "type": "point",
+                "padding": 0.5
+              }
+            },
+            "y": {
+              "datum": 1.21,
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "who",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "description": "Lowest value on each axis, with the player who trails.",
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "value",
+              "as": "lo"
+            },
+            {
+              "op": "argmin",
+              "field": "value",
+              "as": "bottom"
+            }
+          ],
+          "groupby": [
+            "stat"
+          ]
+        },
+        {
+          "calculate": "datum.stat === 'Metres gained' ? format(datum.lo, ',.0f') : format(datum.lo, '.1f')",
+          "as": "valueText"
+        },
+        {
+          "calculate": "'▼ ' + peek(split(datum.bottom.player, ' '))",
+          "as": "who"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#222"
+          },
+          "encoding": {
+            "x": {
+              "field": "stat",
+              "type": "ordinal",
+              "sort": [
+                "Disposals",
+                "Marks",
+                "Goals",
+                "Tackles",
+                "Pressure acts",
+                "Clearances",
+                "Inside 50s",
+                "Metres gained"
+              ],
+              "scale": {
+                "type": "point",
+                "padding": 0.5
+              }
+            },
+            "y": {
+              "datum": -0.09,
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "valueText",
+              "type": "nominal"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "color": "#555"
+          },
+          "encoding": {
+            "x": {
+              "field": "stat",
+              "type": "ordinal",
+              "sort": [
+                "Disposals",
+                "Marks",
+                "Goals",
+                "Tackles",
+                "Pressure acts",
+                "Clearances",
+                "Inside 50s",
+                "Metres gained"
+              ],
+              "scale": {
+                "type": "point",
+                "padding": 0.5
+              }
+            },
+            "y": {
+              "datum": -0.21,
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "who",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

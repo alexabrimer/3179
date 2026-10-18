@@ -1,0 +1,339 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Box plot of player age by club, 2026 lists.",
+  "title": {
+    "text": "How old is each club's list?",
+    "subtitle": [
+      "Age of every listed player on 1 July 2026. The box covers the middle half of each list;",
+      "the black line (and the number on the right) is the median. Italic labels mark the oldest and youngest players."
+    ],
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#555",
+    "subtitleLineHeight": 14
+  },
+  "width": "container",
+  "height": {
+    "step": 24
+  },
+  "padding": {
+    "right": 40,
+    "left": 5,
+    "top": 5,
+    "bottom": 5
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/player_details_with_state.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "dateOfBirth": "string"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "indexof(datum.dateOfBirth, '/') >= 0 ? timeParse(datum.dateOfBirth, '%d/%m/%Y') : toDate(datum.dateOfBirth)",
+      "as": "dob"
+    },
+    {
+      "calculate": "(datetime(2026, 6, 1) - datum.dob) / 31557600000",
+      "as": "age"
+    },
+    {
+      "calculate": "datum.team === 'West Coast Eagles' ? 'Youngest list' : datum.team === 'Brisbane Lions' ? 'Oldest list' : 'Other clubs'",
+      "as": "group"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 15,
+        "median": {
+          "color": "#111",
+          "size": 15
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "team",
+          "type": "nominal",
+          "sort": [
+            "West Coast Eagles",
+            "Richmond",
+            "North Melbourne",
+            "Hawthorn",
+            "St Kilda",
+            "GWS GIANTS",
+            "Fremantle",
+            "Geelong Cats",
+            "Melbourne",
+            "Adelaide Crows",
+            "Gold Coast SUNS",
+            "Port Adelaide",
+            "Essendon",
+            "Carlton",
+            "Western Bulldogs",
+            "Sydney Swans",
+            "Collingwood",
+            "Brisbane Lions"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 12
+          }
+        },
+        "x": {
+          "field": "age",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              14,
+              43
+            ],
+            "nice": false
+          },
+          "title": "Age (years)",
+          "axis": {
+            "values": [
+              20,
+              25,
+              30,
+              35,
+              40
+            ]
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Youngest list",
+              "Oldest list",
+              "Other clubs"
+            ],
+            "range": [
+              "#2a9d8f",
+              "#b03a2e",
+              "#b9c4d0"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "description": "Median age printed on the right of every row.",
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "median",
+              "field": "age",
+              "as": "med"
+            }
+          ],
+          "groupby": [
+            "team"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 11,
+        "color": "#444"
+      },
+      "encoding": {
+        "y": {
+          "field": "team",
+          "type": "nominal",
+          "sort": [
+            "West Coast Eagles",
+            "Richmond",
+            "North Melbourne",
+            "Hawthorn",
+            "St Kilda",
+            "GWS GIANTS",
+            "Fremantle",
+            "Geelong Cats",
+            "Melbourne",
+            "Adelaide Crows",
+            "Gold Coast SUNS",
+            "Port Adelaide",
+            "Essendon",
+            "Carlton",
+            "Western Bulldogs",
+            "Sydney Swans",
+            "Collingwood",
+            "Brisbane Lions"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 12
+          }
+        },
+        "x": {
+          "datum": 43,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              14,
+              43
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "med",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "description": "Oldest player.",
+      "data": {
+        "values": [
+          {
+            "team": "Collingwood",
+            "age": 38.5,
+            "label": "Pendlebury, 38"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#333"
+      },
+      "encoding": {
+        "y": {
+          "field": "team",
+          "type": "nominal",
+          "sort": [
+            "West Coast Eagles",
+            "Richmond",
+            "North Melbourne",
+            "Hawthorn",
+            "St Kilda",
+            "GWS GIANTS",
+            "Fremantle",
+            "Geelong Cats",
+            "Melbourne",
+            "Adelaide Crows",
+            "Gold Coast SUNS",
+            "Port Adelaide",
+            "Essendon",
+            "Carlton",
+            "Western Bulldogs",
+            "Sydney Swans",
+            "Collingwood",
+            "Brisbane Lions"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 12
+          }
+        },
+        "x": {
+          "field": "age",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              14,
+              43
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "description": "Youngest player.",
+      "data": {
+        "values": [
+          {
+            "team": "Hawthorn",
+            "age": 18.5,
+            "label": "Schubert, 18"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -6,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#333"
+      },
+      "encoding": {
+        "y": {
+          "field": "team",
+          "type": "nominal",
+          "sort": [
+            "West Coast Eagles",
+            "Richmond",
+            "North Melbourne",
+            "Hawthorn",
+            "St Kilda",
+            "GWS GIANTS",
+            "Fremantle",
+            "Geelong Cats",
+            "Melbourne",
+            "Adelaide Crows",
+            "Gold Coast SUNS",
+            "Port Adelaide",
+            "Essendon",
+            "Carlton",
+            "Western Bulldogs",
+            "Sydney Swans",
+            "Collingwood",
+            "Brisbane Lions"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 12
+          }
+        },
+        "x": {
+          "field": "age",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              14,
+              43
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  },
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}

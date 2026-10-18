@@ -1,80 +1,275 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-<script src="vega_lite_vis.js"></script>
-<title>AFL Player Statistics</title>
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
-<link rel="stylesheet" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Brownlow Chase: AFL 2026 in data</title>
+  <meta name="description" content="Who collects the Brownlow votes in the 2026 AFL season, where do those players come from, and what makes a contender? An interactive data story.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 </head>
-</head>
-<body class="page">
 
-  <header class="page-header">
-    <h1>AFL Player Statistics for the 2026 Season</h1>
-  </header>
+<body>
 
-  <main class="content">
-    <div class="pure-g">
+<!-- ============================== HERO ============================== -->
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">FIT3179 &middot; Alex Brimer &middot; 32482620</p>
+    <h1>The Brownlow Chase</h1>
+    <p class="deck">Every season, 18 clubs and hundreds of players chase one individual prize. Who gets the votes? Where do those players come from? And what does a contender actually look like?</p>
 
-        <div class="pure-u-2-3">
-            <div id="flowmap" class="chart"></div>
-        </div>
+    <ul class="stat-strip">
+      <li><span class="big">812</span><span class="lbl">players on 2026 lists</span></li>
+      <li><span class="big">18</span><span class="lbl">clubs</span></li>
+      <li><span class="big">1,242</span><span class="lbl">Brownlow votes handed out</span></li>
+      <li><span class="big">47</span><span class="lbl">votes for Nick Daicos, the most of any player</span></li>
+    </ul>
 
-        <div class="pure-u-1-3">
-            <p>Lets look at some of the players from the 2026 season. 
-                <br><br>This first map shows the trades during the 2025 trade period, prior to the 2026 AFL season.
-                Use the drop down box to look at a specific team's trades.
-                <br><br>We then will look at the top 10 players of the season for brownlow votes.
-            </p>
-            <h2>Another chart here</h2>
-        </div>
+    <p class="explainer"><strong>The Brownlow Medal</strong> rewards the &ldquo;fairest and best&rdquo; player of the home-and-away season. After every game the umpires award 3, 2 and 1 votes to the three best players on the ground, and the votes are added up at season&rsquo;s end. Hover over any chart for details, and use the dropdowns on the maps to explore.</p>
+  </div>
+</header>
 
-        <div class="pure-u-1">
-            <div id="choropleth" class="chart"></div>
-        </div>
+<main class="wrap">
 
+<!-- ============================== PART 1 ============================== -->
+<section class="part">
+  <p class="part-label">Part 1</p>
+  <h2>The pipeline</h2>
+  <p class="part-intro">Before the votes, the players. Where do they come from, and how do they end up at their clubs?</p>
+</section>
 
-        <div class="pure-u-1">
-            <h2>Nick Daicos vs Bailey Smith: How do they compare?</h2>
-        </div>
-
-        <div class="pure-u-1-2">
-            <div id="radar" class="chart"></div>
-        </div>
-
-        <div class="pure-u-1-2">
-            <div id="butterfly" class="chart"></div>
-        </div>
-
-        <div class="pure-u-1">
-            <h2>Who had the most disposals?</h2>
-            <div id="bump" class="chart"></div>
-        </div>
-
-        <div class="pure-u-1">
-            <h2>What was their Disposal Efficiency?</h2>
-            <div id="violin" class="chart"></div>
-        </div>
-
-        <div class="pure-u-1">
-            <h2>Contested Possessions across the season</h2>
-            <div id="heatmap" class="chart"></div>
-        </div>
-
-        <div class="pure-u-1">
-            <h2>Brownlow Votes by Club</h2>
-            <div id="proportionalsymbol" class="chart"></div>
-        </div>
-
+<section class="chapter">
+  <div class="split">
+    <div class="story">
+      <p class="kicker">Chapter 1</p>
+      <h3>Victoria is still the heartland</h3>
+      <p>Every AFL player starts somewhere. Of the 786 players whose recruiting state we know, 430 (55%) came from Victoria. Western Australia (124) and South Australia (111) come next, while Tasmania, the Northern Territory and the ACT together supply 31.</p>
+      <p>Choose a club from the dropdown to see where it finds its players. Adelaide, Fremantle and West Coast draw most heavily from their home state, but even Brisbane and Sydney recruit more from Victoria than from their own: 16 of Brisbane&rsquo;s 41 known players, and 20 of Sydney&rsquo;s 44.</p>
+      <p class="callout">Home-state recruiting is strong in the west and south, but Victoria supplies talent to every club.</p>
     </div>
-  </main>
+    <figure class="chart-box">
+      <div id="choropleth" class="chart" role="img" aria-label="Map of Australia shaded by the number of players recruited from each state, with a club selector"></div>
+      <figcaption>Darker states supply more players. Grey states supply none. <span class="src">Source: AFL player details, accessed 18 October 2026. State taken from each player&rsquo;s recruiting history; 26 players are unknown.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="split reverse">
+    <div class="story">
+      <p class="kicker">Chapter 2</p>
+      <h3>Clubs also rebuild by trading</h3>
+      <p>Players don&rsquo;t always stay where they start. This map shows the trades from the 2025 trade period, which reshaped lists in the months before the 2026 season.</p>
+      <p>Choose a club from the dropdown to focus on the players it sent away and brought in. Lines connect the clubs involved in each trade.</p>
+    </div>
+    <figure class="chart-box">
+      <div id="flowmap" class="chart" role="img" aria-label="Flow map of player trades between AFL clubs in the 2025 trade period, with a club selector"></div>
+      <figcaption><span class="src">Source: DraftGuru, 2025 trade period. Club locations are approximate home bases.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== PART 2 ============================== -->
+<section class="part">
+  <p class="part-label">Part 2</p>
+  <h2>The prize</h2>
+  <p class="part-intro">Which clubs, and which kinds of player, collected the Brownlow votes in 2026?</p>
+</section>
+
+<section class="chapter">
+  <div class="split">
+    <div class="story">
+      <p class="kicker">Chapter 3</p>
+      <h3>Sydney and Fremantle led the count</h3>
+      <p>Across the season the umpires handed out 1,242 votes. Sydney&rsquo;s players polled the most (102), narrowly ahead of Fremantle (100). At the other end, Richmond&rsquo;s players polled just 15.</p>
+      <p>Nine clubs are based in Melbourne, so their circles crowd together on the national map. Use the zoom dropdown to open up Victoria, Melbourne or any other state with clubs.</p>
+      <p class="callout">Circle area shows the total votes polled by each club&rsquo;s players.</p>
+    </div>
+    <figure class="chart-box">
+      <div id="proportionalsymbol" class="chart" role="img" aria-label="Map of Brownlow votes by club shown as proportional circles, with a zoom selector"></div>
+      <figcaption>Totals are printed on the circles when you zoom to a state. <span class="src">Source: AFL Tables, 2026 Brownlow Medal. Club locations: club base coordinates compiled by the author.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="split reverse">
+    <div class="story">
+      <p class="kicker">Chapter 4</p>
+      <h3>Midfielders collect the votes</h3>
+      <p>Of the 1,242 votes, 764 (about 62%) went to midfielders. The biggest single cell belongs to midfielders aged 25 or 26, who polled 216 votes between them.</p>
+      <p>Ruckmen are the exception. Of their 77 votes, 44 went to players aged 31 or over.</p>
+      <p class="callout">46% of all votes went to players aged 23 to 26.</p>
+    </div>
+    <figure class="chart-box">
+      <div id="heatmap2" class="chart" role="img" aria-label="Heatmap of Brownlow votes by playing position and age group"></div>
+      <figcaption>Darker cells mean more votes. Blank cells mean no player in that group polled a vote. <span class="src">Sources: AFL Tables (votes) joined to AFL player details (position, birth date) by club and surname.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter full">
+  <div class="story wide">
+    <p class="kicker">Chapter 5</p>
+    <h3>Vote-getters are older than the average player</h3>
+    <div class="two-col">
+      <p>The typical player on a 2026 list is 24, but the typical player who polled votes is 26.6. Experience seems to help.</p>
+      <p>West Coast has the youngest list (median age 22.6) and polled just 31 votes. Brisbane has the oldest (25.8) and polled 86. The link is loose, though: Fremantle&rsquo;s list is of average age (24.0) and still polled 100.</p>
+    </div>
+    <p class="callout">The oldest player is Collingwood&rsquo;s Scott Pendlebury, at 38. The youngest is Hawthorn&rsquo;s Aidan Schubert, at 18.</p>
+  </div>
+  <figure class="chart-box">
+    <div id="boxplot" class="chart" role="img" aria-label="Box plot of player ages for each of the 18 clubs, ordered from youngest to oldest list"></div>
+    <figcaption>Clubs are ordered from the youngest list (top) to the oldest (bottom). <span class="src">Source: AFL player details, accessed 18 October 2026.</span></figcaption>
+  </figure>
+</section>
+
+<!-- ============================== PART 3 ============================== -->
+<section class="part">
+  <p class="part-label">Part 3</p>
+  <h2>The contenders</h2>
+  <p class="part-intro">Now meet the ten players who polled the most votes: Nick Daicos (47), Bailey Smith (36), Marcus Bontempelli (34), Max Gawn (28), Will Ashcroft, Patrick Cripps and Harry Sheezel (27 each), Isaac Heeney and Zak Butters (26 each) and Izak Rankine (25).</p>
+</section>
+
+<section class="chapter">
+  <div class="split">
+    <div class="story">
+      <p class="kicker">Chapter 6</p>
+      <h3>The disposal race</h3>
+      <p>A disposal is a kick or a handball. This chart follows the ten players round by round, ranking them by their running total of disposals.</p>
+      <p>Nick Daicos finished the home-and-away rounds on top with 767, ahead of Bailey Smith (718) and Harry Sheezel (669). Butters is the one to watch: he played only 17 games, yet averaged almost 30 disposals in each.</p>
+      <p class="callout">Daicos averaged 34.9 disposals a game over the home-and-away season.</p>
+    </div>
+    <figure class="chart-box">
+      <div id="bump" class="chart" role="img" aria-label="Bump chart ranking the ten top Brownlow players by running total of disposals, round by round"></div>
+      <figcaption>Higher on the chart means more disposals so far. <span class="src">Source: AFL match statistics for the ten players with the most Brownlow votes, rounds 1 to 24.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter full">
+  <div class="story wide">
+    <p class="kicker">Chapter 7</p>
+    <h3>Same prize, different roads</h3>
+    <div class="two-col">
+      <p>The ten contenders don&rsquo;t play the same way. Each line is one player, and the higher it sits on an axis, the better he rates among the ten. <strong>Click a name in the legend</strong> to follow one player across the page.</p>
+      <p>Daicos leads for disposals, Sheezel for marks and pressure, Heeney for goals, Cripps for tackles and clearances, and Bailey Smith for inside 50s and metres gained. Ruckman Max Gawn sits at the bottom for disposals, tackles, pressure and metres, yet still polled 28 votes.</p>
+    </div>
+  </div>
+  <figure class="chart-box">
+    <div id="parallelcoord" class="chart" role="img" aria-label="Parallel coordinates chart comparing the ten top Brownlow players on eight statistics"></div>
+    <figcaption><strong>Reading the axes:</strong> a <em>mark</em> is a clean catch of a kick; <em>pressure acts</em> are tackles and other efforts to hurry an opponent; a <em>clearance</em> is winning the ball from a stoppage and getting it away; an <em>inside 50</em> moves the ball into the forward zone; <em>metres gained</em> is how far a player carries the ball forward. <span class="src">Source: AFL match statistics, averages per game over the home-and-away season (opening round to round 24).</span></figcaption>
+  </figure>
+</section>
+
+<section class="chapter full">
+  <div class="story wide">
+    <p class="kicker">Chapter 8</p>
+    <h3>Daicos v Smith: two ways to win</h3>
+    <div class="two-col">
+      <p>Daicos and Smith finished first and second in the votes. Over the whole season, finals included, Daicos had more disposals (797 to 774) and kicked more goals (26 to 11).</p>
+      <p>But Smith did more of the hard work without the ball: he laid 117 tackles to Daicos&rsquo;s 58, about twice as many. The radar shows each player&rsquo;s overall shape, and the bars compare them statistic by statistic.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <figure class="chart-box">
+      <div id="radar" class="chart" role="img" aria-label="Radar chart comparing Nick Daicos and Bailey Smith across several statistics"></div>
+      <figcaption>Overall shape.</figcaption>
+    </figure>
+    <figure class="chart-box">
+      <div id="butterfly" class="chart" role="img" aria-label="Butterfly chart comparing Nick Daicos and Bailey Smith statistic by statistic"></div>
+      <figcaption>Season totals, statistic by statistic. <span class="src">Source: AFL match statistics, all games including finals.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="split">
+    <div class="story">
+      <p class="kicker">Chapter 9</p>
+      <h3>Hitting the target</h3>
+      <p>Disposal efficiency is the share of a player&rsquo;s kicks and handballs that help the team. Each shape shows how a player&rsquo;s efficiency varied from game to game: the wider the shape, the more often he landed there.</p>
+      <p>Marcus Bontempelli and Harry Sheezel had the highest median game, at 75%, against 66% for Bailey Smith.</p>
+    </div>
+    <figure class="chart-box">
+      <div id="violin" class="chart" role="img" aria-label="Violin chart of game-by-game disposal efficiency for the ten top Brownlow players"></div>
+      <figcaption><span class="src">Source: AFL match statistics, all games including finals.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter">
+  <div class="split reverse">
+    <div class="story">
+      <p class="kicker">Chapter 10</p>
+      <h3>Winning the contest</h3>
+      <p>A contested possession is won when the ball is up for grabs, not when it is passed to you. Across rounds 1 to 24, Patrick Cripps averaged 14.7 a game, the most of the ten. Daicos (11.0) and Smith (11.6) were close to each other.</p>
+      <p>Each row is a player and each column a round, so you can see who delivered week after week and who came and went.</p>
+    </div>
+    <figure class="chart-box">
+      <div id="heatmap" class="chart" role="img" aria-label="Heatmap of contested possessions for the ten top Brownlow players in every round"></div>
+      <figcaption>Darker cells mean more contested possessions. <span class="src">Source: AFL match statistics.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== CONCLUSION ============================== -->
+<section class="part">
+  <p class="part-label">Finally</p>
+  <h2>What the data says</h2>
+</section>
+
+<section class="takeaways">
+  <div class="card"><span class="num">1</span><h4>Votes follow midfielders in their mid-20s</h4><p>Midfielders took about 62% of the votes, and players aged 23 to 26 took 46%.</p></div>
+  <div class="card"><span class="num">2</span><h4>Stars win in different ways</h4><p>Daicos wins with volume, Smith with tackling and run, and Cripps in the contest. Gawn polled 28 votes while sitting at the bottom for disposals and tackles.</p></div>
+  <div class="card"><span class="num">3</span><h4>Victoria feeds the whole competition</h4><p>55% of players with a known recruiting state came from Victoria. Even Brisbane and Sydney recruit more from Victoria than from their own state.</p></div>
+</section>
+
+</main>
+
+<!-- ============================== DATA & CREDITS ============================== -->
+<footer class="credits">
+  <div class="wrap">
+    <h2>Data, method and credits</h2>
+    <div class="credit-grid">
+      <div>
+        <h4>Data sources</h4>
+        <ul>
+          <li><strong>Player details</strong> (club, position, birth date, recruited from): AFL player data, accessed 18 October 2026.</li>
+          <li><strong>Brownlow votes</strong>: AFL Tables, 2026 Brownlow Medal (afltables.com).</li>
+          <li><strong>Match statistics</strong> for the ten top vote-getters: AFL match data (Champion Data), 2026 season.</li>
+          <li><strong>Trades</strong>: DraftGuru, 2025 trade period (draftguru.com.au).</li>
+          <li><strong>State boundaries</strong>: Natural Earth (naturalearthdata.com), public domain.</li>
+          <li><strong>Club locations</strong>: approximate home bases compiled by the author.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Method notes</h4>
+        <ul>
+          <li>Votes (AFL Tables) were joined to player details (AFL) by club, surname and first initial. All 183 players who polled votes were matched. The script is in the repository (<code>prepare_data.py</code>).</li>
+          <li>Age is measured on 1 July 2026, the middle of the season.</li>
+          <li>The recruiting state comes from each player&rsquo;s recruiting history. It is unknown for 26 of 812 players, who are left out of the first map.</li>
+          <li>Each chart uses the natural window for its measure: the disposal race, the profile chart and the contested-possession heatmap cover the home-and-away season (round 24 and earlier), because that is when Brownlow votes are given. The head-to-head totals and the efficiency shapes include finals.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>About this page</h4>
+        <ul>
+          <li><strong>Author:</strong> [Your name], FIT3179 Data Visualisation 2, Monash University, October 2026.</li>
+          <li><strong>Built with:</strong> Vega-Lite and Vega-Embed. Fonts: Barlow Condensed and Inter (Google Fonts).</li
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="vega_lite_vis.js"></script>
 </body>
 </html>

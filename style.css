@@ -1,39 +1,320 @@
-html,
+/* ===================================================================
+   The Brownlow Chase: layout for laptop screens (about 1100px and up)
+   Type: Barlow Condensed (headings) + Inter (text)
+   =================================================================== */
+
+:root {
+  --ink: #1b1f2a;
+  --muted: #5b6472;
+  --navy: #14213d;
+  --red: #b03a2e;
+  --paper: #f6f3ec;
+  --card: #ffffff;
+  --line: #e3ded2;
+  --head: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
 body {
-    background-color: #F3FAF9;
+  margin: 0;
+  min-width: 1040px;               /* designed for laptops */
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
-.page {
-    width: 850px;
-    background-color: white;
-    margin: auto;
-    padding: 50px;
-    padding-top: 35px;
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
-#text_div {
-    margin-left: 10px;
-    margin-right: 10px;
+/* ------------------------------ hero ------------------------------ */
+.hero {
+  background: var(--navy);
+  color: #fff;
+  padding: 72px 0 56px;
 }
 
-h1 {
-    text-align: center;
-    color: #527298;
-    font-size: 40px;
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f0b4ab;
 }
 
-h2 {
-    text-align: left;
-    color: #000000;
-    font-size: 20px;
-    margin-left: 10px;
+.hero h1 {
+  margin: 0;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 104px;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
-p {
-    color: #2a2a2b;
-    font-size: 16px;
+.deck {
+  max-width: 720px;
+  margin: 24px 0 36px;
+  font-size: 21px;
+  line-height: 1.5;
+  color: #e9ecf3;
 }
 
-.chart {
-    width: 100%;
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 0 0 36px;
+  padding: 24px 0;
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
+
+.stat-strip .big {
+  display: block;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 58px;
+  line-height: 1;
+  color: #fff;
+}
+
+.stat-strip .lbl {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: #c9cfdd;
+}
+
+.explainer {
+  max-width: 760px;
+  margin: 0;
+  font-size: 16px;
+  color: #d5dae6;
+}
+
+.explainer strong { color: #fff; }
+
+/* ------------------------------ parts ------------------------------ */
+.part {
+  margin: 96px 0 32px;
+  padding-top: 16px;
+  border-top: 4px solid var(--navy);
+}
+
+.part-label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.part h2 {
+  margin: 0;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.part-intro {
+  max-width: 760px;
+  margin: 10px 0 0;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+/* ---------------------------- chapters ---------------------------- */
+.chapter { margin: 0 0 80px; }
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.split.reverse { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
+.split.reverse .story { order: 2; }
+.split.reverse > :not(.story) { order: 1; }
+
+.story { min-width: 0; max-width: 62ch; }
+
+.kicker {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.story h3 {
+  margin: 0 0 14px;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.08;
+  color: var(--navy);
+}
+
+.story p { margin: 0 0 14px; }
+
+.callout {
+  margin-top: 22px !important;
+  padding: 4px 0 4px 16px;
+  border-left: 4px solid var(--red);
+  font-weight: 500;
+  color: var(--navy);
+}
+
+/* full-width chapter (text above a wide chart) */
+.chapter.full .story.wide { max-width: none; margin-bottom: 20px; }
+.chapter.full .callout { max-width: 62ch; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+.two-col p { max-width: 62ch; }
+
+/* ------------------------------ charts ------------------------------ */
+.chart-box {
+  min-width: 0;
+  margin: 0;
+  padding: 20px 20px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  min-width: 0;
+}
+
+.chart { width: 100%; min-width: 0; min-height: 120px; }
+
+/* Vega-Embed adds the class "vega-embed" to the .chart div itself.
+   Make it a full-width column so "width": "container" charts fill their box
+   and the dropdown (.vega-bindings) can sit above the chart. */
+.chart.vega-embed { display: flex; flex-direction: column; width: 100%; }
+.chart.vega-embed .vega-bindings { order: -1; }
+.chart.vega-embed details,
+.chart.vega-embed details summary { position: relative; }
+
+/* dropdowns that Vega-Lite draws above the maps */
+.chart .vega-bindings {
+  display: block;
+  margin: 0 0 12px;
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.chart .vega-bindings label { display: inline-flex; align-items: center; gap: 8px; }
+
+.chart .vega-bindings select {
+  padding: 6px 10px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #b9b4a6;
+  border-radius: 4px;
+}
+
+.chart-error { margin: 0; padding: 24px 0; color: var(--red); }
+
+figcaption {
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+figcaption .src { display: block; margin-top: 4px; font-size: 12.5px; color: #77808d; }
+
+/* ---------------------------- takeaways ---------------------------- */
+.takeaways {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 96px;
+}
+
+.card {
+  padding: 24px 24px 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+  border-radius: 6px;
+}
+
+.card .num {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--red);
+}
+
+.card h4 {
+  margin: 6px 0 8px;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+.card p { margin: 0; font-size: 16px; }
+
+/* ----------------------------- credits ----------------------------- */
+.credits {
+  padding: 56px 0 64px;
+  background: var(--navy);
+  color: #d5dae6;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.credits h2 {
+  margin: 0 0 24px;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 36px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.credit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.credits h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f0b4ab;
+}
+
+.credits ul { margin: 0; padding-left: 18px; }
+.credits li { margin-bottom: 8px; }
+.credits strong { color: #fff; }
+.credits code { font-size: 13px; color: #fff; }

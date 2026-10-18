@@ -6,6 +6,9 @@ var radar = "charts/radar.vg.json";
 var butterfly = "charts/butterfly.vg.json";
 var choropleth = "charts/choroplethmap.vg.json"
 var proportionalsymbol = "charts/proportionalsymbolmap.vg.json"
+var parallelcoord = "charts/parallelcoord.vg.json"
+var boxplot = "charts/boxplot.vg.json"
+var heatmap2 = "charts/heatmap2.vg.json"
 vegaEmbed("#flowmap", flowmap).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
@@ -28,5 +31,14 @@ vegaEmbed("#choropleth", choropleth).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
 vegaEmbed("#proportionalsymbol", proportionalsymbol).then(function(result) {
+// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);
+vegaEmbed("#parallelcoord", parallelcoord).then(function(result) {
+// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);
+vegaEmbed("#boxplot", boxplot).then(function(result) {
+// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);
+vegaEmbed("#heatmap2", heatmap2).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
