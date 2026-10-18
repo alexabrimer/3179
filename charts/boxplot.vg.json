@@ -4,8 +4,7 @@
   "title": {
     "text": "How old is each club's list?",
     "subtitle": [
-      "Age of every listed player on 1 July 2026. The box covers the middle half of each list;",
-      "the black line (and the number on the right) is the median. Italic labels mark the oldest and youngest players."
+      "Age of every listed player as of 1 July 2026."
     ],
     "anchor": "start",
     "fontSize": 14,
