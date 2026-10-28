@@ -298,7 +298,7 @@
       }
     },
     {
-      "description": "Club code (Melbourne view only).",
+      "description": "Club code",
       "data": {
         "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/2026_brownlow.csv",
         "format": {

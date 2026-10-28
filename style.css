@@ -32,8 +32,8 @@ body {
   padding: 0 40px;
 }
 
-/* ------------------------------ hero ------------------------------ */
-.hero {
+/* ------------------------------ intro ------------------------------ */
+.intro {
   background: var(--navy);
   color: #fff;
   padding: 72px 0 56px;
@@ -47,7 +47,7 @@ body {
   color: #f0b4ab;
 }
 
-.hero h1 {
+.intro h1 {
   margin: 0;
   font-family: var(--head);
   font-weight: 700;

@@ -46,36 +46,68 @@
       "axis": {"labelAngle": 0, "grid": false}
     },
     "y": {
-      "field": "rank",
-      "type": "quantitative",
-      "title": "Rank (running total of disposals)",
-      "scale": {"reverse": true, "zero": false, "padding": 10},
-      "axis": {"tickMinStep": 1, "format": "d", "grid": true}
-    },
+  "field": "rank",
+  "type": "quantitative",
+  "title": "Rank (running total of disposals)",
+  "scale": {"reverse": true, "zero": false, "padding": 10},
+  "axis": {
+    "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "format": "d",
+    "grid": true
+  }
+},
     "color": {"field": "player", "type": "nominal", "legend": null}
   },
-  "layer": [
-    {
-      "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
-      "encoding": {"detail": {"field": "player", "type": "nominal"}}
-    },
-    {
-      "mark": {"type": "circle", "size": 120, "opacity": 1},
-      "encoding": {
-        "tooltip": [
-          {"field": "player", "type": "nominal", "title": "Player"},
-          {"field": "round", "type": "ordinal", "title": "Round"},
-          {"field": "rank", "type": "quantitative", "title": "Rank"},
-          {"field": "total", "type": "quantitative", "title": "Disposals (round)"},
-          {"field": "running_total", "type": "quantitative", "title": "Disposals (running total)"}
-        ]
+"layer": [
+  {
+    "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
+    "encoding": {
+      "detail": {"field": "player", "type": "nominal"},
+      "opacity": {
+        "condition": {"param": "highlight", "empty": false, "value": 1},
+        "value": 0.15
       }
-    },
-    {
-      "transform": [{"filter": "datum.round == 24"}],
-      "mark": {"type": "text", "align": "left", "dx": 10, "fontWeight": "bold"},
-      "encoding": {"text": {"field": "player", "type": "nominal"}}
     }
+  },
+  {
+    "params": [
+      {
+        "name": "highlight",
+        "select": {
+          "type": "point",
+          "fields": ["player"],
+          "on": "click",
+          "clear": false
+        },
+        "value": [{"player": "Daicos"}]
+      }
+    ],
+    "mark": {"type": "circle", "size": 120, "cursor": "pointer"},
+    "encoding": {
+      "opacity": {
+        "condition": {"param": "highlight", "empty": false, "value": 1},
+        "value": 0.15
+      },
+      "tooltip": [
+        {"field": "player", "type": "nominal", "title": "Player"},
+        {"field": "round", "type": "ordinal", "title": "Round"},
+        {"field": "rank", "type": "quantitative", "title": "Rank"},
+        {"field": "total", "type": "quantitative", "title": "Disposals (round)"},
+        {"field": "running_total", "type": "quantitative", "title": "Disposals (running total)"}
+      ]
+    }
+  },
+  {
+    "transform": [{"filter": "datum.round == 24"}],
+    "mark": {"type": "text", "align": "left", "dx": 10, "fontWeight": "bold"},
+    "encoding": {
+      "text": {"field": "player", "type": "nominal"},
+      "opacity": {
+        "condition": {"param": "highlight", "empty": false, "value": 1},
+        "value": 0.3
+      }
+    }
+  }
   ],
   "config": {"view": {"stroke": null}}
 }

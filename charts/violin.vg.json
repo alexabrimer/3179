@@ -34,7 +34,7 @@
           "field": "xLow",
           "type": "quantitative",
           "axis": null,
-          "scale": {"zero": false, "nice": false}
+          "scale": {"domain": [0.3, 10.7], "nice": false}
         },
         "x2": {"field": "xHigh"},
         "color": {"field": "player", "type": "nominal", "legend": null},
