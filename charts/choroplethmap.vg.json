@@ -123,9 +123,10 @@
             "scheme": "blues"
           },
           "legend": {
-            "title": "Players per 100k",
-            "orient": "right",
-            "format": ".1f"
+            "title": "Players per 100,000 people",
+            "orient": "bottom",
+            "format": ".0f",
+            "direction": "horizontal"
           }
         },
         "tooltip": [
@@ -137,7 +138,7 @@
           {
             "field": "players",
             "type": "quantitative",
-            "title": "Raw Count"
+            "title": "Raw Player Count"
           },
           {
             "field": "players_per_100k",

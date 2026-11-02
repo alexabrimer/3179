@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Butterfly chart: Daicos extends left, Smith extends right.",
+  "description": "Butterfly chart: the first selected player extends left, the second extends right.",
+  "params": [
+    {"name": "playerA", "value": "Daicos"},
+    {"name": "playerB", "value": "Smith"}
+  ],
   "data": {
     "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
     "format": {
@@ -10,13 +14,15 @@
   },
   "transform": [
     {"calculate": "datum['player.surname']", "as": "player"},
-    {"filter": "test(/daicos|smith/i, datum.player)"},
     {"fold": ["goals", "kicks", "marks", "disposals", "tackles"], "as": ["stat", "value"]},
     {
       "aggregate": [{"op": "sum", "field": "value", "as": "total"}],
       "groupby": ["player", "stat"]
     },
-    {"calculate": "test(/daicos/i, datum.player) ? -datum.total : datum.total", "as": "signed"}
+    {"joinaggregate": [{"op": "max", "field": "total", "as": "max_total"}]},
+    {"filter": "lower(datum.player) === lower(playerA) || lower(datum.player) === lower(playerB)"},
+    {"calculate": "lower(datum.player) === lower(playerA) ? 'A' : 'B'", "as": "slot"},
+    {"calculate": "datum.slot === 'A' ? -datum.total : datum.total", "as": "signed"}
   ],
   "width": "container",
   "height": {"step": 40},
@@ -36,13 +42,22 @@
       "axis": {"labelExpr": "abs(datum.value)", "grid": true}
     },
     "color": {
-      "field": "player",
+      "field": "slot",
       "type": "nominal",
       "title": "Player",
-      "legend": {"orient": "top"}
+      "scale": {"domain": ["A", "B"], "range": ["#4c78a8", "#f58518"]},
+      "legend": {"orient": "top", "labelExpr": "datum.value === 'A' ? playerA : playerB"}
     }
   },
   "layer": [
+    {
+      "description": "Invisible points at +/- the largest value so the zero line stays centred",
+      "transform": [
+        {"calculate": "[-datum.max_total, datum.max_total]", "as": "signed"},
+        {"flatten": ["signed"]}
+      ],
+      "mark": {"type": "point", "opacity": 0, "size": 1}
+    },
     {
       "mark": {"type": "bar", "height": {"band": 0.7}},
       "encoding": {

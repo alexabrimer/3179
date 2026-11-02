@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Ranked lollipop: how many times higher each statistic is in games where a player polled Brownlow votes, compared with games where they polled none.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/2026_stats_afltables.csv",
+    "format": {"type": "csv"}
+  },
+  "params": [
+    {
+      "name": "voteTier",
+      "value": 3,
+      "bind": {
+        "input": "select",
+        "options": [3, 2, 1],
+        "labels": ["3 votes (best on ground)", "2 votes", "1 vote"],
+        "name": "Games where the player polled: "
+      }
+    }
+  ],
+  "transform": [
+    {"calculate": "toNumber(datum['Round'])", "as": "round"},
+    {"filter": "isValid(datum.round) && datum.round >= 1 && datum.round <= 25"},
+    {
+      "calculate": "isValid(toNumber(datum['Brownlow.Votes'])) ? toNumber(datum['Brownlow.Votes']) : 0",
+      "as": "votes"
+    },
+    {"filter": "datum.votes === 0 || datum.votes === voteTier"},
+
+    {"calculate": "toNumber(datum['Clearances'])", "as": "Clearances"},
+    {"calculate": "toNumber(datum['Goals'])", "as": "Goals"},
+    {"calculate": "toNumber(datum['Inside.50s'])", "as": "Inside 50s"},
+    {"calculate": "toNumber(datum['Contested.Possessions'])", "as": "Contested possessions"},
+    {"calculate": "toNumber(datum['Goal.Assists'])", "as": "Goal assists"},
+    {"calculate": "toNumber(datum['Disposals'])", "as": "Disposals"},
+    {"calculate": "toNumber(datum['Tackles'])", "as": "Tackles"},
+    {"calculate": "toNumber(datum['Marks'])", "as": "Marks"},
+
+    {
+      "fold": ["Clearances", "Goals", "Inside 50s", "Contested possessions",
+               "Goal assists", "Disposals", "Tackles", "Marks"],
+      "as": ["stat", "value"]
+    },
+    {"filter": "isValid(datum.value)"},
+    {"calculate": "datum.votes === 0 ? 'none' : 'voted'", "as": "group"},
+    {
+      "aggregate": [{"op": "mean", "field": "value", "as": "avg"}],
+      "groupby": ["stat", "group"]
+    },
+    {"pivot": "group", "value": "avg", "groupby": ["stat"]},
+    {"calculate": "datum.voted / datum.none", "as": "ratio"},
+    {"calculate": "format(datum.ratio, '.1f') + '×'", "as": "ratio_label"},
+    {"calculate": "1", "as": "baseline"}
+  ],
+  "width": "container",
+  "height": {"step": 40},
+  "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
+  "encoding": {
+    "y": {
+      "field": "stat",
+      "type": "nominal",
+      "title": null,
+      "sort": {"field": "ratio", "op": "max", "order": "descending"},
+      "axis": {"domain": false, "ticks": false, "labelPadding": 10, "labelFontSize": 13, "labelLimit": 240}
+    }
+  },
+  "layer": [
+    {
+      "description": "Reference line: the same as a game with no votes",
+      "mark": {"type": "rule", "stroke": "#333333", "strokeDash": [4, 4]},
+      "encoding": {
+        "x": {"datum": 1, "type": "quantitative"},
+        "y": {"value": 0},
+        "y2": {"value": {"expr": "height"}}
+      }
+    },
+    {
+      "description": "Lollipop stem",
+      "mark": {"type": "rule", "strokeWidth": 3, "stroke": "#4292c6"},
+      "encoding": {
+        "x": {
+          "field": "baseline",
+          "type": "quantitative",
+          "title": "Times higher than in a game with no votes",
+          "scale": {"domain": [1, 5]},
+          "axis": {
+            "values": [1, 2, 3, 4, 5],
+            "labelExpr": "datum.value + '×'",
+            "grid": false,
+            "titleFontSize": 12
+          }
+        },
+        "x2": {"field": "ratio"}
+      }
+    },
+    {
+      "description": "Lollipop head",
+      "mark": {"type": "circle", "size": 220, "color": "#084594", "opacity": 1},
+      "encoding": {
+        "x": {"field": "ratio", "type": "quantitative"},
+        "tooltip": [
+          {"field": "stat", "type": "nominal", "title": "Statistic"},
+          {"field": "none", "type": "quantitative", "format": ".1f", "title": "Average with no votes"},
+          {"field": "voted", "type": "quantitative", "format": ".1f", "title": "Average in selected games"},
+          {"field": "ratio_label", "type": "nominal", "title": "Times higher"}
+        ]
+      }
+    },
+    {
+      "description": "Value label beside each dot",
+      "mark": {"type": "text", "align": "left", "dx": 14, "fontWeight": "bold", "fontSize": 13},
+      "encoding": {
+        "x": {"field": "ratio", "type": "quantitative"},
+        "text": {"field": "ratio_label", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}
