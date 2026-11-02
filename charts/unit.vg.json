@@ -24,6 +24,15 @@
     },
     {"filter": "datum.vote_rank <= 10 && datum.votes > 0"},
 
+    {
+      "joinaggregate": [{"op": "count", "as": "games"}],
+      "groupby": ["pid"]
+    },
+    {"calculate": "datum.votes == 3 ? 1 : 0", "as": "is3"},
+    {
+      "joinaggregate": [{"op": "sum", "field": "is3", "as": "threes"}],
+      "groupby": ["pid"]
+    },
     {"calculate": "datum.votes == 3 ? [1,2,3] : (datum.votes == 2 ? [1,2] : [1])", "as": "unit"},
     {"flatten": ["unit"]},
     {
@@ -35,7 +44,12 @@
         {"field": "unit", "order": "ascending"}
       ]
     },
-    {"calculate": "datum.pos - 1", "as": "x0"}
+    {"calculate": "datum.pos - 1", "as": "x0"},
+    {
+      "calculate": "datum.name === 'Nick Daicos' ? '↑ Daicos: ' + datum.threes + ' best-on-ground games' : (datum.name === 'Izak Rankine' ? 'Fewest games polled (' + datum.games + '), but ' + datum.threes + ' were 3-vote games' : (datum.name === 'Zak Butters' ? 'Polled in ' + datum.games + ' games, only ' + datum.threes + ' were 3-vote games' : null))",
+      "as": "note"
+    },
+    {"calculate": "datum.name === 'Nick Daicos' ? 38.5 : datum.total_votes + 3", "as": "note_x"}
   ],
   "width": "container",
   "height": {"step": 34},
@@ -58,7 +72,7 @@
           "type": "quantitative",
           "title": "Brownlow votes (one square = one vote)",
           "scale": {"domain": [0, 50]},
-          "axis": {"values": [0, 10, 20, 30, 40, 50], "grid": false, "tickMinStep": 10}
+          "axis": {"values": [0, 10, 20, 30, 40, 50], "grid": false, "labelFontSize": 12, "titleFontSize": 13}
         },
         "x2": {"field": "pos"},
         "color": {
@@ -88,7 +102,25 @@
         "x": {"field": "pos", "type": "quantitative", "scale": {"domain": [0, 50]}},
         "text": {"field": "total_votes", "type": "quantitative"}
       }
+    },
+    {
+      "description": "Annotations beside the Rankine and Butters rows",
+      "transform": [{"filter": "datum.pos == 1 && datum.note != null && datum.name !== 'Nick Daicos'"}],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 12, "fontWeight": "bold", "color": "#333333"},
+      "encoding": {
+        "x": {"field": "note_x", "type": "quantitative", "scale": {"domain": [0, 50]}},
+        "text": {"field": "note", "type": "nominal"}
+      }
+    },
+    {
+      "description": "Daicos annotation, placed one row down in the empty space beside Smith's bar",
+      "transform": [{"filter": "datum.pos == 1 && datum.name === 'Nick Daicos'"}],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dy": 34, "fontSize": 12, "fontWeight": "bold", "color": "#333333"},
+      "encoding": {
+        "x": {"field": "note_x", "type": "quantitative", "scale": {"domain": [0, 50]}},
+        "text": {"field": "note", "type": "nominal"}
+      }
     }
   ],
-  "config": {"view": {"stroke": null}}
+  "config": {"view": {"stroke": null}, "legend": {"labelFontSize": 12, "titleFontSize": 12}}
 }

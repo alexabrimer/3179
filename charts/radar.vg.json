@@ -117,7 +117,7 @@
           "field": "slot",
           "type": "nominal",
           "scale": {"domain": ["A", "B"], "range": ["#4c78a8", "#f58518"]},
-          "legend": {"orient": "top", "title": "Player", "labelExpr": "datum.value === 'A' ? playerA : playerB"}
+          "legend": {"orient": "top", "title": "Player", "symbolOpacity": 1, "labelExpr": "datum.value === 'A' ? playerA : playerB"}
         },
         "order": {"field": "key_index", "type": "quantitative"}
       },

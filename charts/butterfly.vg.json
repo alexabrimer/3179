@@ -22,10 +22,15 @@
     {"joinaggregate": [{"op": "max", "field": "total", "as": "max_total"}]},
     {"filter": "lower(datum.player) === lower(playerA) || lower(datum.player) === lower(playerB)"},
     {"calculate": "lower(datum.player) === lower(playerA) ? 'A' : 'B'", "as": "slot"},
-    {"calculate": "datum.slot === 'A' ? -datum.total : datum.total", "as": "signed"}
+    {"calculate": "datum.slot === 'A' ? -datum.total : datum.total", "as": "signed"},
+    {
+      "joinaggregate": [{"op": "max", "field": "total", "as": "stat_max"}],
+      "groupby": ["stat"]
+    },
+    {"calculate": "datum.total >= datum.stat_max ? 1 : 0", "as": "higher"}
   ],
   "width": "container",
-  "height": {"step": 40},
+  "height": {"step": 62},
   "encoding": {
     "y": {
       "field": "stat",
@@ -37,7 +42,7 @@
     "x": {
       "field": "signed",
       "type": "quantitative",
-      "title": "Total",
+      "title": "Total (the higher number in each pair is in bold)",
       "stack": null,
       "axis": {"labelExpr": "abs(datum.value)", "grid": true}
     },
@@ -46,14 +51,14 @@
       "type": "nominal",
       "title": "Player",
       "scale": {"domain": ["A", "B"], "range": ["#4c78a8", "#f58518"]},
-      "legend": {"orient": "top", "labelExpr": "datum.value === 'A' ? playerA : playerB"}
+      "legend": {"orient": "top", "symbolOpacity": 1, "labelExpr": "datum.value === 'A' ? playerA : playerB"}
     }
   },
   "layer": [
     {
       "description": "Invisible points at +/- the largest value so the zero line stays centred",
       "transform": [
-        {"calculate": "[-datum.max_total, datum.max_total]", "as": "signed"},
+        {"calculate": "[-datum.max_total * 1.15, datum.max_total * 1.15]", "as": "signed"},
         {"flatten": ["signed"]}
       ],
       "mark": {"type": "point", "opacity": 0, "size": 1}
@@ -69,13 +74,23 @@
       }
     },
     {
-      "transform": [{"filter": "datum.signed < 0"}],
+      "transform": [{"filter": "datum.signed < 0 && datum.higher == 0"}],
       "mark": {"type": "text", "align": "right", "dx": -4, "fontSize": 11},
       "encoding": {"text": {"field": "total", "type": "quantitative"}}
     },
     {
-      "transform": [{"filter": "datum.signed >= 0"}],
+      "transform": [{"filter": "datum.signed < 0 && datum.higher == 1"}],
+      "mark": {"type": "text", "align": "right", "dx": -4, "fontSize": 12, "fontWeight": "bold"},
+      "encoding": {"text": {"field": "total", "type": "quantitative"}}
+    },
+    {
+      "transform": [{"filter": "datum.signed >= 0 && datum.higher == 0"}],
       "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 11},
+      "encoding": {"text": {"field": "total", "type": "quantitative"}}
+    },
+    {
+      "transform": [{"filter": "datum.signed >= 0 && datum.higher == 1"}],
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": "bold"},
       "encoding": {"text": {"field": "total", "type": "quantitative"}}
     },
     {

@@ -387,6 +387,42 @@
           "type": "nominal"
         }
       }
+    },
+    {
+      "description": "Pointer to the Melbourne cluster (Australia view only).",
+      "data": {
+        "values": [
+          {
+            "lon": 144.0,
+            "lat": -40.4,
+            "t": "9 clubs are based in Melbourne ↗"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "fontSize": {
+          "expr": "zoomTo === 'Australia' ? 11 : 0"
+        },
+        "fontStyle": "italic",
+        "color": "#444444",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        }
+      }
     }
   ],
   "config": {

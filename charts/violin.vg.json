@@ -3,27 +3,77 @@
   "description": "Violin plot with container sizing (single view, no facets).",
   "data": {
     "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
-    "format": {"type": "csv", "parse": {"disposalEfficiency": "number"}}
+    "format": {
+      "type": "csv",
+      "parse": {
+        "disposalEfficiency": "number"
+      }
+    }
   },
   "width": "container",
   "height": 400,
-  "autosize": {"type": "fit", "contains": "padding"},
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "transform": [
-    {"calculate": "datum['player.surname']", "as": "player"},
+    {
+      "calculate": "datum['player.surname']",
+      "as": "player"
+    },
     {
       "density": "disposalEfficiency",
-      "groupby": ["player"],
-      "as": ["value", "density"]
+      "groupby": [
+        "player"
+      ],
+      "as": [
+        "value",
+        "density"
+      ]
     },
-    {"window": [{"op": "dense_rank", "as": "idx"}], "sort": [{"field": "player"}]},
-    {"joinaggregate": [{"op": "max", "field": "density", "as": "maxDensity"}]},
-    {"calculate": "datum.density / datum.maxDensity * 0.4", "as": "half"},
-    {"calculate": "datum.idx - datum.half", "as": "xLow"},
-    {"calculate": "datum.idx + datum.half", "as": "xHigh"}
+    {
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "idx"
+        }
+      ],
+      "sort": [
+        {
+          "field": "player"
+        }
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "density",
+          "as": "maxDensity"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.density / datum.maxDensity * 0.4",
+      "as": "half"
+    },
+    {
+      "calculate": "datum.idx - datum.half",
+      "as": "xLow"
+    },
+    {
+      "calculate": "datum.idx + datum.half",
+      "as": "xHigh"
+    }
   ],
   "layer": [
     {
-      "mark": {"type": "area", "orient": "horizontal", "opacity": 0.7, "interpolate": "monotone"},
+      "mark": {
+        "type": "area",
+        "orient": "horizontal",
+        "opacity": 0.7,
+        "interpolate": "monotone"
+      },
       "encoding": {
         "y": {
           "field": "value",
@@ -34,27 +84,201 @@
           "field": "xLow",
           "type": "quantitative",
           "axis": null,
-          "scale": {"domain": [0.3, 10.7], "nice": false}
+          "scale": {
+            "domain": [
+              0.3,
+              10.7
+            ],
+            "nice": false
+          }
         },
-        "x2": {"field": "xHigh"},
-        "color": {"field": "player", "type": "nominal", "legend": null},
-        "tooltip": [{"field": "player", "type": "nominal", "title": "Player"}]
+        "x2": {
+          "field": "xHigh"
+        },
+        "color": {
+          "field": "player",
+          "type": "nominal",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "player",
+            "type": "nominal",
+            "title": "Player"
+          }
+        ]
       }
     },
     {
       "transform": [
         {
-          "aggregate": [{"op": "min", "field": "value", "as": "yMin"}],
-          "groupby": ["player", "idx"]
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "value",
+              "as": "yMin"
+            }
+          ],
+          "groupby": [
+            "player",
+            "idx"
+          ]
         }
       ],
-      "mark": {"type": "text", "baseline": "top", "dy": 6, "fontSize": 11},
+      "mark": {
+        "type": "text",
+        "baseline": "top",
+        "dy": 6,
+        "fontSize": 11
+      },
       "encoding": {
-        "x": {"field": "idx", "type": "quantitative", "axis": null},
-        "y": {"field": "yMin", "type": "quantitative"},
-        "text": {"field": "player", "type": "nominal"}
+        "x": {
+          "field": "idx",
+          "type": "quantitative",
+          "axis": null
+        },
+        "y": {
+          "field": "yMin",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "player",
+          "type": "nominal"
+        }
       }
+    },
+    {
+      "description": "Median game for each player.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/alexabrimer/3179/refs/heads/main/data/stats_brownlow_top_ten.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "disposalEfficiency": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum['player.surname']",
+          "as": "player"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "median",
+              "field": "disposalEfficiency",
+              "as": "med"
+            }
+          ],
+          "groupby": [
+            "player"
+          ]
+        },
+        {
+          "window": [
+            {
+              "op": "dense_rank",
+              "as": "idx"
+            }
+          ],
+          "sort": [
+            {
+              "field": "player"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.idx - 0.4",
+          "as": "xl"
+        },
+        {
+          "calculate": "datum.idx + 0.4",
+          "as": "xr"
+        },
+        {
+          "calculate": "format(datum.med, '.0f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeWidth": 2.5,
+            "color": "#111111"
+          },
+          "encoding": {
+            "x": {
+              "field": "xl",
+              "type": "quantitative",
+              "axis": null,
+              "scale": {
+                "domain": [
+                  0.3,
+                  10.7
+                ],
+                "nice": false
+              }
+            },
+            "x2": {
+              "field": "xr"
+            },
+            "y": {
+              "field": "med",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -9,
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "color": "#111111"
+          },
+          "encoding": {
+            "x": {
+              "field": "idx",
+              "type": "quantitative",
+              "axis": null,
+              "scale": {
+                "domain": [
+                  0.3,
+                  10.7
+                ],
+                "nice": false
+              }
+            },
+            "y": {
+              "field": "med",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "lab",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
     }
   ],
-  "config": {"view": {"stroke": null}}
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  },
+  "title": {
+    "text": "How efficiently do the top ten use the ball?",
+    "subtitle": [
+      "The black line marks each player's median (middle) game.",
+      "Bontempelli and Sheezel top the ten at 75%; Smith is at 66%."
+    ],
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#555",
+    "subtitleLineHeight": 14
+  }
 }

@@ -49,18 +49,24 @@
     {"pivot": "group", "value": "avg", "groupby": ["stat"]},
     {"calculate": "datum.voted / datum.none", "as": "ratio"},
     {"calculate": "format(datum.ratio, '.1f') + '×'", "as": "ratio_label"},
-    {"calculate": "1", "as": "baseline"}
+    {"calculate": "1", "as": "baseline"},
+    {"window": [{"op": "rank", "as": "ratio_rank"}], "sort": [{"field": "ratio", "order": "descending"}]},
+    {
+      "calculate": "datum.ratio_rank == 6 ? 'Red dots mark the two biggest gaps' : (datum.ratio_rank == 8 ? 'Tackles and marks change the least' : null)",
+      "as": "note"
+    },
+    {"calculate": "datum.ratio_rank == 6 ? 2.8 : 2.6", "as": "note_x"}
   ],
   "width": "container",
-  "height": {"step": 40},
-  "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
+  "height": {"step": 52},
+  "padding": {"left": 10, "right": 20, "top": 28, "bottom": 10},
   "encoding": {
     "y": {
       "field": "stat",
       "type": "nominal",
       "title": null,
       "sort": {"field": "ratio", "op": "max", "order": "descending"},
-      "axis": {"domain": false, "ticks": false, "labelPadding": 10, "labelFontSize": 13, "labelLimit": 240}
+      "axis": {"domain": false, "ticks": false, "labelPadding": 10, "labelFontSize": 14, "labelLimit": 240}
     }
   },
   "layer": [
@@ -75,7 +81,7 @@
     },
     {
       "description": "Lollipop stem",
-      "mark": {"type": "rule", "strokeWidth": 3, "stroke": "#4292c6"},
+      "mark": {"type": "rule", "strokeWidth": 3},
       "encoding": {
         "x": {
           "field": "baseline",
@@ -86,23 +92,51 @@
             "values": [1, 2, 3, 4, 5],
             "labelExpr": "datum.value + '×'",
             "grid": false,
-            "titleFontSize": 12
+            "labelFontSize": 12,
+            "titleFontSize": 13
           }
         },
-        "x2": {"field": "ratio"}
+        "x2": {"field": "ratio"},
+        "color": {
+          "condition": {"test": "datum.ratio_rank <= 2", "value": "#d98880"},
+          "value": "#4292c6"
+        }
       }
     },
     {
       "description": "Lollipop head",
-      "mark": {"type": "circle", "size": 220, "color": "#084594", "opacity": 1},
+      "mark": {"type": "circle", "size": 220, "opacity": 1},
       "encoding": {
         "x": {"field": "ratio", "type": "quantitative"},
+        "color": {
+          "condition": {"test": "datum.ratio_rank <= 2", "value": "#b03a2e"},
+          "value": "#084594"
+        },
         "tooltip": [
           {"field": "stat", "type": "nominal", "title": "Statistic"},
           {"field": "none", "type": "quantitative", "format": ".1f", "title": "Average with no votes"},
           {"field": "voted", "type": "quantitative", "format": ".1f", "title": "Average in selected games"},
           {"field": "ratio_label", "type": "nominal", "title": "Times higher"}
         ]
+      }
+    },
+    {
+      "description": "Label for the dashed reference line",
+      "data": {"values": [{"t": "same as a game with no votes"}]},
+      "mark": {"type": "text", "align": "left", "baseline": "bottom", "dx": 6, "dy": -4, "fontSize": 12, "fontStyle": "italic", "color": "#333333"},
+      "encoding": {
+        "x": {"datum": 1, "type": "quantitative"},
+        "y": {"value": 0},
+        "text": {"field": "t", "type": "nominal"}
+      }
+    },
+    {
+      "description": "Notes on two rows",
+      "transform": [{"filter": "datum.note != null"}],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 12, "fontStyle": "italic", "color": "#555555"},
+      "encoding": {
+        "x": {"field": "note_x", "type": "quantitative"},
+        "text": {"field": "note", "type": "nominal"}
       }
     },
     {
