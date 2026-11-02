@@ -48,6 +48,7 @@
       <p class="part-intro">AFL players come from all across Australia, but where are the most players from? Which State is recruited from the most and how are players traded?</p>
     </section>
 
+    <!-- ========== Choropleth Map ========== -->
     <section class="chapter">
       <div class="split">
         <div class="story">
@@ -64,6 +65,7 @@
       </div>
     </section>
 
+    <!-- ========== Flow Map ========== -->
     <section class="chapter">
       <div class="split reverse">
         <div class="story">
@@ -86,6 +88,7 @@
       <p class="part-intro">Which clubs, and which kinds of player collected the Brownlow votes in 2026?</p>
     </section>
 
+    <!-- ========== Proportional Symbol Map ========== -->
     <section class="chapter">
       <div class="split">
         <div class="story">
@@ -102,6 +105,7 @@
       </div>
     </section>
 
+    <!-- ========== Heatmap ========== -->
     <section class="chapter">
       <div class="split reverse">
         <div class="story">
@@ -112,12 +116,13 @@
           <p class="callout">46% of all votes went to players aged 23 to 26.</p>
         </div>
         <figure class="chart-box">
-          <div id="heatmap2" class="chart" role="img" aria-label="Heatmap of Brownlow votes by playing position and age group"></div>
-          <figcaption>Darker cells mean more votes. Blank cells mean no player in that group polled a vote. <span class="src">Sources: AFL Tables (votes) joined to AFL player details (position, birth date) by club and surname.</span></figcaption>
+          <div id="heatmap" class="chart" role="img" aria-label="Heatmap of Brownlow votes by playing position and age group"></div>
+          <figcaption class="src">Sources: AFL Tables (votes) joined to AFL player details (position, birth date) by club and surname.</figcaption>
         </figure>
       </div>
     </section>
 
+    <!-- ========== Box Plot ========== -->
     <section class="chapter full">
       <div class="story wide">
         <p class="kicker">Chart 5</p>
@@ -131,7 +136,7 @@
       </div>
       <figure class="chart-box">
         <div id="boxplot" class="chart" role="img" aria-label="Box plot of player ages for each of the 18 clubs, ordered from youngest to oldest list"></div>
-        <figcaption>Clubs are ordered from the youngest list (top) to the oldest (bottom). <span class="src">Source: AFL player details, accessed 18 October 2026.</span></figcaption>
+        <figcaption class="src">Source: AFL player details, accessed 18 October 2026.</figcaption>
       </figure>
     </section>
 
@@ -142,6 +147,15 @@
       <p class="part-intro">Now let's look at the ten players who polled the most votes: Nick Daicos (47), Bailey Smith (36), Marcus Bontempelli (34), Max Gawn (28), Will Ashcroft, Patrick Cripps and Harry Sheezel (27 each), Isaac Heeney and Zak Butters (26 each) and Izak Rankine (25).</p>
     </section>
 
+    <!-- ========== Unit Chart ========== -->
+     <section class="chapter full">
+        <figure class="chart-box">
+          <div id="unit" class="chart" role="img"></div>
+          <figcaption class="src">Source: AFLtables</figcaption>
+        </figure>
+    </section>
+
+    <!-- ========== Bump Chart ========== -->
     <section class="chapter">
       <div class="split">
         <div class="story">
@@ -153,45 +167,12 @@
         </div>
         <figure class="chart-box">
           <div id="bump" class="chart" role="img" aria-label="Bump chart ranking the ten top Brownlow players by running total of disposals, round by round"></div>
-          <figcaption>Higher on the chart means more disposals so far. <span class="src">Source: AFL match statistics for the ten players with the most Brownlow votes, rounds 1 to 24.</span></figcaption>
+          <figcaption class="src">Source: AFL match statistics for the ten players with the most Brownlow votes, rounds 1 to 24.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="chapter full">
-      <div class="story wide">
-        <p class="kicker">Chart 7</p>
-        <h3>Same prize, different strengths</h3>
-        <div class="two-col">
-          <p>The ten contenders don&rsquo;t play the same way. Each line is one player, and the higher it sits on an axis, the better he rates among the ten. <strong>Click a name in the legend</strong> to follow one player across the page.</p>
-          <p>Daicos leads for disposals, Sheezel for marks and pressure, Heeney for goals, Cripps for tackles and clearances, and Bailey Smith for inside 50s and metres gained. Ruckman Max Gawn sits at the bottom for disposals, tackles, pressure and metres, yet still polled 28 votes.</p>
-        </div>
-      </div>
-      <figure class="chart-box">
-        <div id="parallelcoord" class="chart" role="img" aria-label="Parallel coordinates chart comparing the ten top Brownlow players on eight statistics"></div>
-      </figure>
-    </section>
-
-    <section class="chapter full">
-      <div class="story wide">
-        <p class="kicker">Chart 8</p>
-        <h3>Daicos v Smith: How do they compare?</h3>
-        <div class="two-col">
-          <p>Daicos and Smith finished first and second in the votes. Over the whole season, finals included, Daicos had more disposals (797 to 774) and kicked more goals (26 to 11).</p>
-          <p>But Smith did more of the hard work without the ball: he laid 117 tackles to Daicos&rsquo;s 58, about twice as many. The radar shows each player&rsquo;s overall shape, and the bars compare them statistic by statistic.</p>
-        </div>
-      </div>
-      <div class="pair">
-        <figure class="chart-box">
-          <div id="radar" class="chart" role="img" aria-label="Radar chart comparing Nick Daicos and Bailey Smith across several statistics"></div>
-        </figure>
-        <figure class="chart-box">
-          <div id="butterfly" class="chart" role="img" aria-label="Butterfly chart comparing Nick Daicos and Bailey Smith statistic by statistic"></div>
-          <figcaption>Season totals, statistic by statistic. <span class="src">Source: AFL match statistics, all games including finals.</span></figcaption>
-        </figure>
-      </div>
-    </section>
-
+    <!-- ========== Violin Chart ========== -->
     <section class="chapter">
       <div class="split">
         <div class="story">
@@ -207,17 +188,86 @@
       </div>
     </section>
 
+    <!-- ========== Parallel Coordinate Chart ========== -->
+    <section class="chapter full">
+      <div class="story wide">
+        <p class="kicker">Chart 7</p>
+        <h3>Same prize, different strengths</h3>
+        <div class="two-col">
+          <p>The ten contenders don&rsquo;t play the same way. Each line is one player, and the higher it sits on an axis, the better he rates among the ten. <strong>Click a name in the legend</strong> to follow one player across the page.</p>
+          <p>Daicos leads for disposals, Sheezel for marks and pressure, Heeney for goals, Cripps for tackles and clearances, and Bailey Smith for inside 50s and metres gained. Ruckman Max Gawn sits at the bottom for disposals, tackles, pressure and metres, yet still polled 28 votes.</p>
+        </div>
+      </div>
+      <figure class="chart-box">
+        <div id="parallelcoord" class="chart" role="img" aria-label="Parallel coordinates chart comparing the ten top Brownlow players on eight statistics"></div>
+      </figure>
+    </section>
+
+    <!-- ========== Radar Chart & Butterfly Chart========== -->
+    <section class="chapter full">
+      <div class="story wide">
+        <p class="kicker">Chart 8</p>
+        <h3>Daicos v Smith: How do they compare?</h3>
+        <div class="two-col">
+          <p>Daicos and Smith finished first and second in the votes. Over the whole season, finals included, Daicos had more disposals (797 to 774) and kicked more goals (26 to 11).</p>
+          <p>But Smith did more of the hard work without the ball: he laid 117 tackles to Daicos&rsquo;s 58, about twice as many. The radar shows each player&rsquo;s overall shape, and the bars compare them statistic by statistic.</p>
+        </div>
+      </div>
+
+      <div class="player-picker">
+        <label>Player 1
+          <select id="playerA">
+            <option value="Daicos">Nick Daicos</option>
+            <option value="Smith">Bailey Smith</option>
+            <option value="Bontempelli">Marcus Bontempelli</option>
+            <option value="Gawn">Max Gawn</option>
+            <option value="Ashcroft">Will Ashcroft</option>
+            <option value="Cripps">Patrick Cripps</option>
+            <option value="Sheezel">Harry Sheezel</option>
+            <option value="Heeney">Isaac Heeney</option>
+            <option value="Butters">Zak Butters</option>
+            <option value="Rankine">Izak Rankine</option>
+          </select>
+        </label>
+        <label>Player 2
+          <select id="playerB">
+            <option value="Daicos">Nick Daicos</option>
+            <option value="Smith">Bailey Smith</option>
+            <option value="Bontempelli">Marcus Bontempelli</option>
+            <option value="Gawn">Max Gawn</option>
+            <option value="Ashcroft">Will Ashcroft</option>
+            <option value="Cripps">Patrick Cripps</option>
+            <option value="Sheezel">Harry Sheezel</option>
+            <option value="Heeney">Isaac Heeney</option>
+            <option value="Butters">Zak Butters</option>
+            <option value="Rankine">Izak Rankine</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="pair">
+        <figure class="chart-box">
+          <div id="radar" class="chart" role="img" aria-label="Radar chart comparing Nick Daicos and Bailey Smith across several statistics"></div>
+        </figure>
+        <figure class="chart-box">
+          <div id="butterfly" class="chart" role="img" aria-label="Butterfly chart comparing Nick Daicos and Bailey Smith statistic by statistic"></div>
+          <figcaption class="src">Source: AFL match statistics, all games including finals.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ========== Lollipop Chart ========== -->
     <section class="chapter">
       <div class="split reverse">
         <div class="story">
-          <p class="kicker">Chart 10</p>
+          <p class="kicker">Chart 12</p>
           <h3>Winning the contest</h3>
-          <p>A contested possession is won when the ball is up for grabs, not when it is passed to you. Across rounds 1 to 24, Patrick Cripps averaged 14.7 a game, the most of the ten. Daicos (11.0) and Smith (11.6) were close to each other.</p>
-          <p>Each row is a player and each column a round, so you can see who delivered week after week and who came and went.</p>
+          <p></p>
+          <p></p>
         </div>
         <figure class="chart-box">
-          <div id="heatmap" class="chart" role="img" aria-label="Heatmap of contested possessions for the ten top Brownlow players in every round"></div>
-          <figcaption>Darker cells mean more contested possessions. <span class="src">Source: AFL match statistics.</span></figcaption>
+          <div id="lollipop" class="chart" role="img"></div>
+          <figcaption class="src">Source: AFLtables.</figcaption>
         </figure>
       </div>
     </section>
