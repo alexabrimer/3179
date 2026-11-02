@@ -34,7 +34,7 @@ vegaEmbed("#parallelcoord", parallelcoord).then(function(result) {
 vegaEmbed("#boxplot", boxplot).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
-vegaEmbed("#heatmap2", heatmap2).then(function(result) {
+vegaEmbed("#heatmap", heatmap).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
 vegaEmbed("#unit", unit).then(function(result) {
